@@ -3,7 +3,7 @@ var util = require('gulp-util')
 var gulpConnect = require('gulp-connect');
 var portfinder = require('portfinder');
 
-var DIST_DIR = 'dist';
+var DIST_DIR = 'docs';
 
 gulp.task('serve', function() {
   portfinder.getPort({port: 3000}, function (err, port) {

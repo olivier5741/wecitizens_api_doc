@@ -4,8 +4,7 @@
   "description": "API specs for wecitizens (open api)",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp serve",
-    "deploy": "gh-pages -d dist"
+    "start": "gulp serve"
   },
   "repository": {
     "type": "git",
@@ -23,7 +22,6 @@
   },
   "homepage": "https://github.com/olivier5741/wecitizens_api_doc#readme",
   "dependencies": {
-    "gh-pages": "^1.2.0",
     "gulp": "^3.9.1",
     "gulp-connect": "^5.5.0",
     "gulp-util": "^3.0.8",

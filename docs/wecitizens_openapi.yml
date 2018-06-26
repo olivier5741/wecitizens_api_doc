@@ -44,9 +44,22 @@ paths:
               schema:
                 $ref: "#/components/schemas/election"
               examples:
-                default:
+                2014_be_regional:
                   value:
-                    key: 2018_be_district
+                    key: 2014_be_regional
+                    date: 2014-05-25
+                    districts:
+                      - key: BE_ED
+                        name: be_district_regional_german_electoral_college
+                      - key: BE_EF
+                        name: be_district_regional_french_electoral_college
+                      - key: BE_EN
+                        name: be_district_regional_dutch_electoral_college
+                    i18n:
+                      en:
+                        be_district_regional_german_electoral_college: German electoral college
+                        be_district_regional_french_electoral_college: French electoral college
+                        be_district_regional_dutcg_electoral_college: Dutch electoral college
   # /candidates/{id}:
   /vote/election/{main_election_key}/district/{district_key}: # not sure this is the best way to do it
     get:
@@ -171,6 +184,24 @@ paths:
               schema:
                 $ref: "#/components/schemas/survey"
               examples:
+                2014_be_regional:
+                  value:
+                    key: 2014_be_regional
+                    name: survey_2014_be_regional
+                    question_order:
+                      - legal_retirement_age_should_be_increased_65_to_67
+                      - turkey_may_join_eu
+                    questions:
+                      - key: legal_retirement_age_should_be_increased_65_to_67
+                        notice: Some notice
+                      - key: turkey_may_join_eu
+                        notice: Some notice
+                    i18n:
+                      fr:
+                        survey_2014_be_regional: Elections régionales 2014    
+                      en:
+                        question_legal_retirement_age_should_be_increased_65_to_67: The legal retirement age should be increased from 65 to 67 years.    
+                        question_turkey_may_join_eu: Turkey may join the European Union.
                 default:
                   value:
                     key: 2018_be_district_wallonia_rural

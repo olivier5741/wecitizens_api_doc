@@ -1,0 +1,30 @@
+{
+  "name": "wecitizens_api_doc",
+  "version": "0.4.0",
+  "description": "API specs for wecitizens (open api)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"start": "gulp serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olivier5741/wecitizens_api_doc.git"
+  },
+  "keywords": [
+    "openapi",
+    "wecitizens",
+    "api"
+  ],
+  "author": "",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/olivier5741/wecitizens_api_doc/issues"
+  },
+  "homepage": "https://github.com/olivier5741/wecitizens_api_doc#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.5.0",
+    "gulp-util": "^3.0.8",
+    "portfinder": "^1.0.13"
+  }
+}

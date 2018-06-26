@@ -1,0 +1,276 @@
+# languages : en, fr, nl, de
+# what is an institution and an authority
+openapi: 3.0.0
+servers:
+  - url: api.wecitizens.be
+    description: prod
+  - url: api-test.wecitizens.be
+    description: dev
+info:
+  title: WeCitizens API
+  version: '0.1.0'
+# Add a logo
+x-tagGroups:
+  - name: politics
+    tags: [election]
+  - name: gps # maybe find something more appropriate
+    tags: [poll, survey, answer, match]
+tags:
+  - name: election
+  - name: poll
+  - name: survey
+  - name: answer
+  - name: match
+paths:
+  /politics/election/{key}:
+    get:
+      summary: election info
+      tags: [election]
+      parameters:
+        - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/election"
+              examples:
+                default:
+                  value:
+                    key: 2018_be_district
+  /politics/election/{key}/circonscription/{circonscription_key}: # not sure this is the best way to do it
+    get:
+      summary: election info for circonscription, parties and candidates
+      tags: [election]
+      parameters:
+        - $ref: '#/components/parameters/key'
+        - $ref: '#/components/parameters/circonscription_key'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/election"
+              examples:
+                default:
+                  value:
+                    key: 2018_be_district_6850
+                    main_election_key: 2018_be_district
+                    circonscription_key: 6850
+  /gps/campaign/{key}:
+    get:
+      summary: campaign info
+      tags: [poll]
+      parameters:
+        - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/campaign"
+              examples:
+                default:
+                  value:
+                    key: 2018_be_district
+  /gps/poll/{key}:
+    get:
+      summary: poll info, related survey and segment
+      tags: [poll]
+      parameters:
+        - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/poll"
+              examples:
+                default:
+                  value:
+                    key: 2018_be_district_6850
+                    survey_key: 2018_be_district_wallonia_rural
+                    segment_key: 2018_be_district_6850
+  /gps/survey/{key}:
+    get:
+      summary: survey info, questions
+      tags: [survey]
+      parameters:
+        - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/survey"
+              examples:
+                default:
+                  value:
+                    key: 2018_be_district_wallonia_rural
+                    questions: 
+                      - order: 1
+                        key: should_social_care_be_private
+                      - order: 2
+                        key: should_watching_the_red_devils_be_mandatory
+  /gps/submission:
+    post:
+      summary: submit survey answers
+      tags: [answer]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/submission"
+            examples:
+              default:
+                value:                  
+                  poll_key: 2018_be_district_6850
+                  survey_key: 2018_be_district_wallonia_rural
+                  segment_key: 2018_be_district_6850
+                  answers: 
+                    - value: strongly_no
+                      tolerance: important
+                      question_key: should_social_care_be_private
+                    - value: rather_yes
+                      tolerance: not_important
+                      question_key: should_watching_the_red_devils_be_mandatory
+      responses:
+        '201':
+          description: created
+  /gps/match:
+    post:
+      summary: find matching segment elements
+      tags: [match]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/match"
+            examples:
+              default:
+                value:
+                  segment_key: 2018_be_district_6850_candidates
+                  answers: 
+                    - value: strongly_no
+                      tolerance: important
+                      question_key: should_social_care_be_private
+                    - value: rather_yes
+                      tolerance: not_important
+                      question_key: should_watching_the_red_devils_be_mandatory
+      responses:
+        '200':
+          description: success
+components:
+  parameters:
+    key:
+      name: key
+      required: true          
+      in: path
+      schema:
+        type: string
+    circonscription_key:
+      name: circonscription_key
+      required: true          
+      in: path
+      schema:
+        type: string
+  schemas:
+    election:
+      required:
+        - key
+      properties:
+        key: 
+          $ref: '#/components/parameters/key'
+        main_election_key:
+          type: string
+        circonscription_key: 
+          $ref: '#/components/parameters/circonscription_key'
+        date: # or date ?? 2018-06 -> is ISO valid
+          type: string
+          format: date
+        active: 
+          type: boolean
+    candidate: # they use election_roll
+      properties:
+        politician_key:
+          type: string
+        election_key:
+          type: string
+        party_key:
+          type: string
+    politician:
+      properties:
+        key:
+          type: string
+        firstname: 
+          type: string
+        lastname: 
+          type: string
+        picture:
+          type: string # maybe URI is possible
+    circonscription:
+      properties:
+        key:
+          type: string
+        postcode:
+          type: string
+    campaign:
+      properties:
+        key: 
+          $ref: '#/components/parameters/key'
+    poll:
+      properties:
+        key: 
+          $ref: '#/components/parameters/key'
+        survey_key: 
+          type: string
+        segment_key:
+          type: string
+    survey:
+      properties:
+        key: 
+          $ref: '#/components/parameters/key'
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/survey_question'
+    survey_question:
+      properties:
+        order:
+          type: integer
+        key:
+          type: string
+        # there is a name and an explanation/notice [excerpt ??]
+    submission:
+      properties:
+        poll_key:
+          type: string
+        survey_key:
+          type: string
+        segment_key:
+          type: string
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/answer'
+    answer:
+      properties:
+        value:
+          type: string
+        tolerance:
+          type: string
+        question_key:
+          type: string
+    match:
+      properties:
+        segment_key:
+          type: string
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/answer'

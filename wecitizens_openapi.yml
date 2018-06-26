@@ -39,13 +39,14 @@ paths:
                 default:
                   value:
                     key: 2018_be_district
-  /politics/election/{key}/circonscription/{circonscription_key}: # not sure this is the best way to do it
+  # /candidates/{id}:
+  /politics/election/{main_election_key}/district/{district_key}: # not sure this is the best way to do it
     get:
-      summary: election info for circonscription, parties and candidates
+      summary: election info for district, parties and candidates
       tags: [election]
       parameters:
         - $ref: '#/components/parameters/key'
-        - $ref: '#/components/parameters/circonscription_key'
+        - $ref: '#/components/parameters/district_key'
       responses:
         '200':
           description: success
@@ -58,7 +59,24 @@ paths:
                   value:
                     key: 2018_be_district_6850
                     main_election_key: 2018_be_district
-                    circonscription_key: 6850
+                    district_key: 6850
+                    parties:
+                      - key: cdnv
+                        name: CDN-V
+                        candidates:
+                          - order: 1
+                            key: o.wouters
+                      - key: ecolo
+                        name: Ecolo
+                        candidates:
+                          - order: 1
+                            key: d.sum
+                    candidates:
+                      - key: o.wouters
+                        fullname: Olivier Wouters
+                      - key: d.sum
+                        fullname: Daniel Sum
+                        party_key: cdnv
   /gps/campaign/{key}:
     get:
       summary: campaign info
@@ -173,8 +191,8 @@ components:
       in: path
       schema:
         type: string
-    circonscription_key:
-      name: circonscription_key
+    district_key:
+      name: district_key
       required: true          
       in: path
       schema:
@@ -184,26 +202,52 @@ components:
       required:
         - key
       properties:
+        id:
+          type: integer
         key: 
           $ref: '#/components/parameters/key'
         main_election_key:
           type: string
-        circonscription_key: 
-          $ref: '#/components/parameters/circonscription_key'
+        district_key: 
+          $ref: '#/components/parameters/district_key'
         date: # or date ?? 2018-06 -> is ISO valid
           type: string
           format: date
         active: 
           type: boolean
+        parties:
+          type: array
+          items:
+            $ref: '#/components/schemas/party'
+        candidates:
+          type: array
+          items:
+            $ref: '#/components/schemas/candidate'
+    party:
+      properties:
+        id:
+          type: integer
+        key:
+          type: string
+        name:
+          type: string
     candidate: # they use election_roll
       properties:
-        politician_key:
-          type: string
+        id:
+          type: integer
         election_key:
           type: string
-        party_key:
+        key:
           type: string
-    politician:
+        name:
+          type: string
+        party_key:
+          type: string        
+        politician_key:
+          type: string
+        politician_url:
+          type: string
+    politician: # not sure I need this ...
       properties:
         key:
           type: string
@@ -213,7 +257,7 @@ components:
           type: string
         picture:
           type: string # maybe URI is possible
-    circonscription:
+    district:
       properties:
         key:
           type: string

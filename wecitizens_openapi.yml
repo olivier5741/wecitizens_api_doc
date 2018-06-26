@@ -1,5 +1,11 @@
 # languages : en, fr, nl, de
 # what is an institution and an authority
+
+
+#headers:
+#  Accept-Language:
+#    $ref: '#/components/headers/Accept-Language'
+
 openapi: 3.0.0
 servers:
   - url: api.wecitizens.be
@@ -11,20 +17,22 @@ info:
   version: '0.1.0'
 # Add a logo
 x-tagGroups:
-  - name: politics
-    tags: [election]
+  - name: vote
+    tags: [election, party, candidate]
   - name: gps # maybe find something more appropriate
     tags: [poll, survey, answer, match]
 tags:
   - name: election
+  - name: party
+  - name: candidate
   - name: poll
   - name: survey
   - name: answer
   - name: match
 paths:
-  /politics/election/{key}:
+  /vote/election/{key}:
     get:
-      summary: election info
+      summary: an election
       tags: [election]
       parameters:
         - $ref: '#/components/parameters/key'
@@ -40,9 +48,9 @@ paths:
                   value:
                     key: 2018_be_district
   # /candidates/{id}:
-  /politics/election/{main_election_key}/district/{district_key}: # not sure this is the best way to do it
+  /vote/election/{main_election_key}/district/{district_key}: # not sure this is the best way to do it
     get:
-      summary: election info for district, parties and candidates
+      summary: a district election
       tags: [election]
       parameters:
         - $ref: '#/components/parameters/key'
@@ -77,9 +85,45 @@ paths:
                       - key: d.sum
                         fullname: Daniel Sum
                         party_key: cdnv
+  /vote/party/search:
+    get:
+      summary: search parties
+      tags: [party]
+      parameters:
+        - $ref: '#/components/parameters/election_key'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/party_search_response"
+              examples:
+                default:
+                  value:
+                    data:
+                      - key: cdnv
+  /vote/candidate/search:
+    get:
+      summary: search candidates
+      tags: [candidate]
+      parameters:
+        - $ref: '#/components/parameters/election_key'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/candidate_search_response"
+              examples:
+                default:
+                  value:
+                    data:
+                      - key: o.wouters
   /gps/campaign/{key}:
     get:
-      summary: campaign info
+      summary: a poll campaign
       tags: [poll]
       parameters:
         - $ref: '#/components/parameters/key'
@@ -89,14 +133,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/campaign"
+                $ref: "#/components/schemas/poll_campaign"
               examples:
                 default:
                   value:
                     key: 2018_be_district
   /gps/poll/{key}:
     get:
-      summary: poll info, related survey and segment
+      summary: a poll, related survey and segments
       tags: [poll]
       parameters:
         - $ref: '#/components/parameters/key'
@@ -115,7 +159,7 @@ paths:
                     segment_key: 2018_be_district_6850
   /gps/survey/{key}:
     get:
-      summary: survey info, questions
+      summary: a survey and related questions
       tags: [survey]
       parameters:
         - $ref: '#/components/parameters/key'
@@ -130,18 +174,19 @@ paths:
                 default:
                   value:
                     key: 2018_be_district_wallonia_rural
+                    questions_order:
+                      - should_social_care_be_private
+                      - should_watching_the_red_devils_be_mandatory
                     questions: 
-                      - order: 1
-                        key: should_social_care_be_private
-                      - order: 2
-                        key: should_watching_the_red_devils_be_mandatory
+                      - key: should_social_care_be_private
+                      - key: should_watching_the_red_devils_be_mandatory
   /gps/submission:
     post:
-      summary: submit survey answers
+      summary: submit answers
       tags: [answer]
       requestBody:
         content:
-          application/json:
+          application/json:     
             schema:
               $ref: "#/components/schemas/submission"
             examples:
@@ -160,9 +205,13 @@ paths:
       responses:
         '201':
           description: created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/submission"
   /gps/match:
     post:
-      summary: find matching segment elements
+      summary: match answers
       tags: [match]
       requestBody:
         content:
@@ -184,6 +233,11 @@ paths:
         '200':
           description: success
 components:
+  headers:
+    Accept-Language:
+      description: The languages for i18n
+      schema:
+        type: string
   parameters:
     key:
       name: key
@@ -197,15 +251,33 @@ components:
       in: path
       schema:
         type: string
+    election_key:
+      name: election_key      
+      in: query
+      schema:
+        type: string
   schemas:
+    i18n:
+      type: object
+      description: scoped translations
+      properties:
+        nl:
+          type: object
+        fr:
+          type: object
+        de:
+          type: object
     election:
+      type: object
+      description: an election [main or district] with parties and candidates
       required:
         - key
       properties:
-        id:
-          type: integer
         key: 
-          $ref: '#/components/parameters/key'
+          $ref: '#/components/parameters/key' # TODO should have path parameter and normal ones
+        type:
+          type: string
+          enum: [main, district]
         main_election_key:
           type: string
         district_key: 
@@ -218,56 +290,89 @@ components:
         parties:
           type: array
           items:
-            $ref: '#/components/schemas/party'
+            $ref: '#/components/schemas/election_party'
         candidates:
           type: array
           items:
             $ref: '#/components/schemas/candidate'
-    party:
+        i18n:
+          $ref: '#/components/schemas/i18n'
+    election_party:
+      type: object
+      description: an election party with members
       properties:
-        id:
-          type: integer
         key:
           type: string
         name:
+          type: string
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/election_party_member'
+
+    election_party_member:
+      type: object
+      description: an election party member
+      properties:
+        order:
+          type: integer
+        key:
           type: string
     candidate: # they use election_roll
+      type: object
+      description: an election candidate
       properties:
-        id:
-          type: integer
-        election_key:
-          type: string
         key:
           type: string
         name:
-          type: string
-        party_key:
-          type: string        
+          type: string    
+        picture:
+          type: string # maybe URI is possible   
         politician_key:
           type: string
         politician_url:
           type: string
-    politician: # not sure I need this ...
+    candidate_search_response:
+      type: object
       properties:
-        key:
-          type: string
-        firstname: 
-          type: string
-        lastname: 
-          type: string
-        picture:
-          type: string # maybe URI is possible
+        start:
+          type: integer
+        limit:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/candidate'
+    party_search_response:
+      type: object
+      properties:
+        start:
+          type: integer
+        limit:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/election_party'
     district:
+      type: object
+      description: an election district
       properties:
         key:
           type: string
         postcode:
           type: string
-    campaign:
+        i18n:
+          $ref: '#/components/schemas/i18n'
+    poll_campaign:
+      type: object
+      description: a poll campaign
       properties:
         key: 
           $ref: '#/components/parameters/key'
     poll:
+      type: object
+      description: a poll
       properties:
         key: 
           $ref: '#/components/parameters/key'
@@ -276,22 +381,40 @@ components:
         segment_key:
           type: string
     survey:
+      type: object
+      description: a survey with questions
       properties:
         key: 
           $ref: '#/components/parameters/key'
+        questions_order:
+          type: array
+          items:
+            type: string
         questions:
           type: array
           items:
-            $ref: '#/components/schemas/survey_question'
-    survey_question:
+            $ref: '#/components/schemas/question'
+        i18n:
+          $ref: '#/components/schemas/i18n'
+    question:
+      type: object
+      description: a question
       properties:
-        order:
-          type: integer
         key:
           type: string
         # there is a name and an explanation/notice [excerpt ??]
     submission:
+      type: object
+      description: answers submission
       properties:
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+        time:
+          readOnly: true
+          type: string
+          format: datetime
         poll_key:
           type: string
         survey_key:
@@ -303,6 +426,8 @@ components:
           items:
             $ref: '#/components/schemas/answer'
     answer:
+      type: object
+      description: an answer
       properties:
         value:
           type: string
@@ -311,6 +436,8 @@ components:
         question_key:
           type: string
     match:
+      type: object
+      description: answers match submission
       properties:
         segment_key:
           type: string

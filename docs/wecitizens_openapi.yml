@@ -188,20 +188,61 @@ paths:
                   value:
                     key: 2014_be_regional
                     name: survey_2014_be_regional
+                    answer_formats:
+                      - key: agr_5_scale_tol_3_scale_abs
+                        items:
+                          - key: fully_agree
+                            name: answer_format_item_fully_agree
+                            weight: 100
+                          - key: rather_yes
+                            name: answer_format_rather_yes
+                            weight: 75
+                          - key: no_opinion
+                            name: answer_format_item_no_opinion
+                            weight: 50
+                          - key: rather_no
+                            name: answer_format_item_rather_no
+                            weight: 25
+                          - key: strongly_disagree
+                            name: answer_format_item_strongly_disagree
+                            weight: 0
+                        tolerance:
+                          absolute: true
+                          items:
+                            - key: very_important
+                              name: answer_format_tolerance_item_very_important
+                              weight: 2.5
+                            - key: important
+                              name: answer_format_tolerance_item_important
+                              weight: 1
+                            - key: not_important
+                              name: answer_format_tolerance_item_not_important
+                              weight: 0.4
                     question_order:
                       - legal_retirement_age_should_be_increased_65_to_67
                       - turkey_may_join_eu
                     questions:
                       - key: legal_retirement_age_should_be_increased_65_to_67
                         notice: Some notice
+                        answer_format: agr_5_scale_tol_3_scale_abs
                       - key: turkey_may_join_eu
                         notice: Some notice
+                        answer_format: agr_5_scale_tol_3_scale_abs
                     i18n:
                       fr:
                         survey_2014_be_regional: Elections régionales 2014    
                       en:
                         question_legal_retirement_age_should_be_increased_65_to_67: The legal retirement age should be increased from 65 to 67 years.    
                         question_turkey_may_join_eu: Turkey may join the European Union.
+                        answer_format_item_fully_agree: Fully agree
+                        answer_format_item_rather_yes: Rather yes
+                        answer_format_item_no_opinion: No opinion
+                        answer_format_item_rather_no: Rather no
+                        answer_format_item_strongly_disagree: Strongly disagree
+                        answer_format_tolerance_absolute: Absolute
+                        answer_format_tolerance_item_very_important: Very important
+                        answer_format_tolerance_item_important: Important
+                        answer_format_tolerance_item_not_important: Not important
                 default:
                   value:
                     key: 2018_be_district_wallonia_rural
@@ -340,7 +381,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/election_party_member'
-
     election_party_member:
       type: object
       description: an election party member
@@ -417,6 +457,10 @@ components:
       properties:
         key: 
           $ref: '#/components/parameters/key'
+        answer_formats:
+          type: array
+          items:
+            $ref: '#/components/schemas/answer_format'
         questions_order:
           type: array
           items:
@@ -434,6 +478,36 @@ components:
         key:
           type: string
         # there is a name and an explanation/notice [excerpt ??]
+    answer_format:
+      type: object
+      description: an answer format
+      properties:
+        key: 
+          $ref: '#/components/parameters/key'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/answer_format_item'
+        tolerance:
+          $ref: '#/components/schemas/answer_format_tolerance'
+    answer_format_tolerance:
+      type: object
+      properties:
+        absolute:
+          type: boolean
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/answer_format_item'
+    answer_format_item:
+      type: object    
+      properties:
+        key: 
+          $ref: '#/components/parameters/key' # trouble with this in swagger_uis
+        name:
+          type: string
+        weight:
+          type: integer # TODO find format for double 
     submission:
       type: object
       description: answers submission

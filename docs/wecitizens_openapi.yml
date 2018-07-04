@@ -76,11 +76,52 @@ paths:
               schema:
                 $ref: "#/components/schemas/election"
               examples:
-                default:
+                compatibility:
                   value:
-                    key: 2018_be_district_6850
-                    main_election_key: 2018_be_district
-                    district_key: 6850
+                    key: 2018_be_federal_chamber_of_representatives_fa
+                    type: be_federal_chamber_of_representatives                    
+                    date: 2017-05-17
+                    main_election_key: 2018_be_federal_chamber_of_representatives
+                    district_type: province # not sure it's the right term
+                    district_key: be_fa
+                    parties:
+                      - key: be_bub
+                        name: party_be_bub_name
+                        candidates:
+                          - order: 1
+                            key: joeri_pen
+                      - key: be_cdv
+                        name: party_be_cdv_name
+                        candidates:
+                          - order: 1
+                            key: servais_verherstraeten
+                          - order: 2
+                            key: nahima_lanjri
+                        substitutes:
+                          - order: 1
+                            key: walter_schroons
+                    candidates:
+                      - key: servais_verherstraeten
+                        name: Servais Verherstraeten
+                        politician_id: politician_be_232
+                      - key: nahima_lanjri
+                        name: Nahima Lanjri
+                        politician_id: politician_be_142
+                      - key: walter_schroons
+                        name: Walter Schroons
+                        politician_id: politician_be_142
+                    i18n:
+                      en:
+                        party_be_bub_name: B.U.B
+                        party_be_cdv_name: CD&V
+                        election_type_be_federal_chamber_of_representatives: Federal Chamber of Representatives # maybe already loaded
+                      nl:
+                        district_be_fa: Antwerp # maybe already loaded
+                default: # TODO : adapt according to sample above 
+                  value:
+                    key: 2018_be_municipal_6850
+                    main_election_key: 2018_be_municipal
+                    district_key: be_municipal_6850
                     parties:
                       - key: cdnv
                         name: CDN-V
@@ -349,9 +390,12 @@ components:
           $ref: '#/components/parameters/key' # TODO should have path parameter and normal ones
         type:
           type: string
-          enum: [main, district]
+          enum: [be_federal_chamber_of_representatives]
         main_election_key:
           type: string
+        district_type:
+          type: string
+          enum: [province, municipality]
         district_key: 
           $ref: '#/components/parameters/district_key'
         date: # or date ?? 2018-06 -> is ISO valid
@@ -377,11 +421,15 @@ components:
           type: string
         name:
           type: string
-        members:
+        candidates:
           type: array
           items:
-            $ref: '#/components/schemas/election_party_member'
-    election_party_member:
+            $ref: '#/components/schemas/election_party_candidate'
+        substitutes:
+          type: array
+          items:
+            $ref: '#/components/schemas/election_party_candidate'
+    election_party_candidate:
       type: object
       description: an election party member
       properties:
@@ -399,7 +447,7 @@ components:
           type: string    
         picture:
           type: string # maybe URI is possible   
-        politician_key:
+        politician_id:
           type: string
         politician_url:
           type: string

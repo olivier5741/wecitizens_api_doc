@@ -8,10 +8,12 @@
 
 openapi: 3.0.0
 servers:
-  - url: api.wecitizens.be
-    description: prod
-  - url: api-test.wecitizens.be
-    description: dev
+  - url: https://olivier5741.github.io/wecitizens_api_doc/api
+    description: mock
+  - url: http://wecitizensapi.co-labs.be:8080/api/v1
+    description: dev 
+  - url: localhost:3000/api
+    description: local
 info:
   title: WeCitizens API
   version: '0.3.0'
@@ -68,7 +70,7 @@ paths:
       summary: a district election
       tags: [election]
       parameters:
-        - $ref: '#/components/parameters/key'
+        - $ref: '#/components/parameters/main_election_key'
         - $ref: '#/components/parameters/district_key'
       responses:
         '200':
@@ -406,6 +408,12 @@ components:
   parameters:
     key:
       name: key
+      required: true          
+      in: path
+      schema:
+        type: string
+    main_election_key:
+      name: main_election_key
       required: true          
       in: path
       schema:

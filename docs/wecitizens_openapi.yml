@@ -1,10 +1,6 @@
 # languages : en, fr, nl, de
 # what is an institution and an authority
-
-
-#headers:
-#  Accept-Language:
-#    $ref: '#/components/headers/Accept-Language'
+# add path to get all elections + path for active elections
 
 openapi: 3.0.0
 servers:
@@ -12,7 +8,7 @@ servers:
     description: mock
   - url: http://wecitizensapi.co-labs.be:8080/api/v1
     description: dev 
-  - url: localhost:3000/api
+  - url: http://localhost:3000/api
     description: local
 info:
   title: WeCitizens API
@@ -38,6 +34,7 @@ paths:
       tags: [election]
       parameters:
         - $ref: '#/components/parameters/key'
+        - $ref: '#/components/parameters/accept_language'
       responses:
         '200':
           description: success
@@ -72,6 +69,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/main_election_key'
         - $ref: '#/components/parameters/district_key'
+        - $ref: '#/components/parameters/accept_language'
       responses:
         '200':
           description: success
@@ -149,6 +147,7 @@ paths:
       tags: [party]
       parameters:
         - $ref: '#/components/parameters/election_key'
+        - $ref: '#/components/parameters/accept_language'
       responses:
         '200':
           description: success
@@ -200,6 +199,7 @@ paths:
       tags: [poll]
       parameters:
         - $ref: '#/components/parameters/key'
+        - $ref: '#/components/parameters/accept_language'
       responses:
         '200':
           description: success
@@ -217,6 +217,7 @@ paths:
       tags: [poll]
       parameters:
         - $ref: '#/components/parameters/key'
+        - $ref: '#/components/parameters/accept_language'
       responses:
         '200':
           description: success
@@ -236,6 +237,7 @@ paths:
       tags: [survey]
       parameters:
         - $ref: '#/components/parameters/key'
+        - $ref: '#/components/parameters/accept_language'
       responses:
         '200':
           description: success
@@ -406,6 +408,11 @@ components:
       schema:
         type: string
   parameters:
+    accept_language:
+      name: Accept-Language
+      schema:
+        type: string
+        enum: [en,fr,nl]
     key:
       name: key
       required: true          

@@ -29,9 +29,9 @@ Belgian provinces and regions : https://en.wikipedia.org/wiki/ISO_3166-2:BE
 
 ### Municipal elections
 
-1. Find main election through [/vote/election/be_2018_municipal.json](/docs/api/vote/election/be_2018_municipal.json)
+1. Find main election through [/vote/election/2018_be_municipal.json](/docs/api/vote/election/2018_be_municipal.json)
 2. Get zip code. Use `6850`
-3. Find local election through [/vote/election/be_2018_municipal/district/be_6850.json](/docs/api/vote/election/be_2018_municipal/district/be_6850.json).
+3. Find local election through [/vote/election/2018_be_municipal/district/be_6850.json](/docs/api/vote/election/2018_be_municipal/district/be_6850.json).
 4. Find related poll through [/gps/poll/2018_be_municipal_be_6850.json](/docs/api/gps/poll/2018_be_municipal_be_6850.json) so you get the survey key.
 5. Get the survey through [/gps/survey/2018_be_municipal_wallonia_rural.json](/docs/api/gps/survey/2018_be_municipal_wallonia_rural.json)
 

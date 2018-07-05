@@ -1,0 +1,69 @@
+{
+  "key": "2018_be_provincial",
+  "type": "be_provincial",
+  "date": "2018-10-14T00:00:00.000Z",
+  "district_type": "province",
+  "districts": [
+    {
+      "key": "be_van",
+      "name": "district_be_van"
+    },
+    {
+      "key": "be_wbr",
+      "name": "district_be_wbr"
+    },
+    {
+      "key": "be_wht",
+      "name": "district_be_wht"
+    },
+    {
+      "key": "be_wlg",
+      "name": "district_be_wlg"
+    },
+    {
+      "key": "be_vli",
+      "name": "district_be_vli"
+    },
+    {
+      "key": "be_wlx",
+      "name": "district_be_wlx"
+    },
+    {
+      "key": "be_wna",
+      "name": "district_be_wna"
+    },
+    {
+      "key": "be_vov",
+      "name": "district_be_vov"
+    },
+    {
+      "key": "be_vbr",
+      "name": "district_be_vbr"
+    },
+    {
+      "key": "be_vnw",
+      "name": "district_be_vnw"
+    }
+  ],
+  "i18n": {
+    "en": {
+      "election_type_be_provincial": "Provincial elections"
+    },
+    "fr": {
+      "election_type_be_municipal": "Élections provinciales",
+      "district_be_wbr" : "Brabant wallon",
+      "district_be_wht" : "Hainaut",
+      "district_be_wlg" : "Liège",      
+      "district_be_wlx" : "Luxembourg",
+      "district_be_wna" : "Namur",
+    },
+    "nl": {
+      "election_type_be_municipal": "Provinciale verkiezingen",
+      "district_be_van" : "Antwerpen",
+      "district_be_vli" : "Limburg",
+      "district_be_vov" : "Oost-Vlaanderen",
+      "district_be_vbr" : "Vlaams-Brabant",
+      "district_be_vwv" : "West-Vlaanderen",
+    }    
+  }
+}

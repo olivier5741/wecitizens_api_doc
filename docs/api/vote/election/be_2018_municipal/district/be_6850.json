@@ -1,0 +1,66 @@
+{
+  "key": "2018_be_municipal_be_6850",
+  "type": "be_municipal",
+  "date": "2018-10-14T00:00:00.000Z",
+  "main_election_key": "2018_be_municipal",
+  "district_type": "municipality",
+  "district_key": "be_6850",
+  "district_name" : "district_be_6850_name",
+  "parties": [
+    {
+      "key": "be_bub",
+      "name": "party_be_bub_name",
+      "candidates": [
+        {
+          "order": 1,
+          "key": "joeri_pen"
+        }
+      ]
+    },
+    {
+      "key": "be_cdv",
+      "name": "party_be_cdv_name",
+      "candidates": [
+        {
+          "order": 1,
+          "key": "servais_verherstraeten"
+        },
+        {
+          "order": 2,
+          "key": "nahima_lanjri"
+        }
+      ],
+      "substitutes": [
+        {
+          "order": 1,
+          "key": "walter_schroons"
+        }
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "key": "servais_verherstraeten",
+      "name": "Servais Verherstraeten",
+      "politician_id": "politician_be_232"
+    },
+    {
+      "key": "nahima_lanjri",
+      "name": "Nahima Lanjri",
+      "politician_id": "politician_be_142"
+    },
+    {
+      "key": "walter_schroons",
+      "name": "Walter Schroons",
+      "politician_id": "politician_be_142"
+    }
+  ],
+  "i18n": {
+    "en": {
+      "party_be_bub_name": "B.U.B",
+      "party_be_cdv_name": "CD&V",
+      "district_be_6850_name": "Paliseul",
+      "election_type_be_municipal": "Municipal elections"
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "key": "be_2018_municipal_wallonia_rural",
+  "name": "survey_be_2018_municipal_wallonia_rural",
+  "question_order": [
+    "question_2",
+    "question_6"
+  ],
+  "questions": [
+    {
+      "key": "question_2",
+      "text": "question_2_text",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_6",
+      "text": "question_6_text",
+      "notice": "question_6_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    }
+  ],
+  "answer_formats": [
+    {
+      "key": "agr_5_scale_tol_3_scale_abs",
+      "items": [
+        {
+          "key": "fully_agree",
+          "name": "answer_format_item_fully_agree",
+          "weight": 100
+        },
+        {
+          "key": "rather_yes",
+          "name": "answer_format_rather_yes",
+          "weight": 75
+        },
+        {
+          "key": "no_opinion",
+          "name": "answer_format_item_no_opinion",
+          "weight": 50
+        },
+        {
+          "key": "rather_no",
+          "name": "answer_format_item_rather_no",
+          "weight": 25
+        },
+        {
+          "key": "strongly_disagree",
+          "name": "answer_format_item_strongly_disagree",
+          "weight": 0
+        }
+      ],
+      "tolerance": {
+        "absolute": true,
+        "items": [
+          {
+            "key": "very_important",
+            "name": "answer_format_tolerance_item_very_important",
+            "weight": 2.5
+          },
+          {
+            "key": "important",
+            "name": "answer_format_tolerance_item_important",
+            "weight": 1
+          },
+          {
+            "key": "not_important",
+            "name": "answer_format_tolerance_item_not_important",
+            "weight": 0.4
+          }
+        ]
+      }
+    }
+  ],
+  "i18n": {
+    "en": {
+      "question_2_text": "Regions should manage their social security systems independently",
+      "question_6_text": "Les Régions devraient gérer de façon autonome leur sécurité sociale",
+      "question_6_notice": "Dans le cadre de la 6° réforme de l’Etat, la totalité des recettes d’une branche de la sécurité sociale -les allocations familiales - sera transféré aux trois Régions et à la Communauté germanophone. \nDans la Région de Bruxelles-Capitale, le transfert aura lieu à la Commission communautaire commune dont relève l’ensemble des francophones et des néerlandophones y domiciliés. \nChaque entité pourra adopter sa propre clef de répartition et fixera, de manière autonome, ses critères de répartition en fonction des objectifs de sa politique familiale. \nL’ensemble des cotisations sociales (y compris celles relatives aux allocations familiales) à charges des entreprises ou des travailleurs indépendants restent, pour leur fixation et leur collecte, du ressort de l’Etat fédéral. \nCeci pour éviter des différences dans les taux des cotisations sociales pouvant influencer le choix de localisation des entreprises sur base d’une surenchère entre les Régions.\n",
+      "answer_format_item_fully_agree": "Fully agree",
+      "answer_format_item_rather_yes": "Rather yes",
+      "answer_format_item_no_opinion": "No opinion",
+      "answer_format_item_rather_no": "Rather no",
+      "answer_format_item_strongly_disagree": "Strongly disagree",
+      "answer_format_tolerance_absolute": "Absolute",
+      "answer_format_tolerance_item_very_important": "Very important",
+      "answer_format_tolerance_item_important": "Important",
+      "answer_format_tolerance_item_not_important": "Not important"
+    }
+  }
+}

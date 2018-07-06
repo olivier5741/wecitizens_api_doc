@@ -1,6 +1,6 @@
 {
-  "key": "be_2018_municipal_wallonia_rural",
-  "name": "survey_be_2018_municipal_wallonia_rural",
+  "key": "2018_be_municipal_wallonia_rural",
+  "name": "survey_2018_be_municipal_wallonia_rural",
   "question_order": [
     "question_2",
     "question_6"

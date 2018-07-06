@@ -12,7 +12,7 @@ servers:
     description: local
 info:
   title: WeCitizens API
-  version: '0.3.0'
+  version: '0.4.0'
 # Add a logo
 x-tagGroups:
   - name: vote
@@ -80,12 +80,12 @@ paths:
               examples:
                 compatibility:
                   value:
-                    key: 2018_be_federal_chamber_of_representatives_fa
+                    key: 2018_be_federal_chamber_of_representatives_van
                     type: be_federal_chamber_of_representatives                    
                     date: 2017-05-17
                     main_election_key: 2018_be_federal_chamber_of_representatives
                     district_type: province # not sure it's the right term
-                    district_key: be_fa
+                    district_key: be_van
                     parties:
                       - key: be_bub
                         name: party_be_bub_name
@@ -210,7 +210,7 @@ paths:
               examples:
                 default:
                   value:
-                    key: 2018_be_district
+                    key: 2018_be_municipal
   /gps/poll/{key}:
     get:
       summary: a poll, related survey and segments
@@ -228,9 +228,9 @@ paths:
               examples:
                 default:
                   value:
-                    key: 2018_be_district_6850
-                    survey_key: 2018_be_district_wallonia_rural
-                    segment_key: 2018_be_district_6850
+                    key: 2018_be_municipal_be_6850
+                    survey_key: 2018_be_municipal_wallonia_rural
+                    segment_key: 2018_be_municipal_be_6850_politician
   /gps/survey/{key}:
     get:
       summary: a survey and related questions
@@ -246,10 +246,10 @@ paths:
               schema:
                 $ref: "#/components/schemas/survey"
               examples:
-                compatibility:
+                municipal:
                   value:
-                    key: be_brussels_2014
-                    name: survey_be_brussels_2014
+                    key: 2018_be_municipal_wallonia_rural
+                    name: survey_2018_be_municipal_wallonia_rural
                     question_order:
                       - question_2
                       - question_6
@@ -294,13 +294,6 @@ paths:
                     i18n:  
                       en:
                         question_2_text: Regions should manage their social security systems independently
-                        question_6_text: Les Régions devraient gérer de façon autonome leur sécurité sociale
-                        question_6_notice: |
-                          Dans le cadre de la 6° réforme de l’Etat, la totalité des recettes d’une branche de la sécurité sociale -les allocations familiales - sera transféré aux trois Régions et à la Communauté germanophone. 
-                          Dans la Région de Bruxelles-Capitale, le transfert aura lieu à la Commission communautaire commune dont relève l’ensemble des francophones et des néerlandophones y domiciliés. 
-                          Chaque entité pourra adopter sa propre clef de répartition et fixera, de manière autonome, ses critères de répartition en fonction des objectifs de sa politique familiale. 
-                          L’ensemble des cotisations sociales (y compris celles relatives aux allocations familiales) à charges des entreprises ou des travailleurs indépendants restent, pour leur fixation et leur collecte, du ressort de l’Etat fédéral. 
-                          Ceci pour éviter des différences dans les taux des cotisations sociales pouvant influencer le choix de localisation des entreprises sur base d’une surenchère entre les Régions.
                         answer_format_item_fully_agree: Fully agree # factorise this
                         answer_format_item_rather_yes: Rather yes
                         answer_format_item_no_opinion: No opinion
@@ -310,7 +303,16 @@ paths:
                         answer_format_tolerance_item_very_important: Very important
                         answer_format_tolerance_item_important: Important
                         answer_format_tolerance_item_not_important: Not important
-                2014_be_regional:
+                      fr:
+                        question_6_text: Les Régions devraient gérer de façon autonome leur sécurité sociale
+                        question_6_notice: |
+                          Dans le cadre de la 6° réforme de l’Etat, la totalité des recettes d’une branche de la sécurité sociale -les allocations familiales - sera transféré aux trois Régions et à la Communauté germanophone. 
+                          Dans la Région de Bruxelles-Capitale, le transfert aura lieu à la Commission communautaire commune dont relève l’ensemble des francophones et des néerlandophones y domiciliés. 
+                          Chaque entité pourra adopter sa propre clef de répartition et fixera, de manière autonome, ses critères de répartition en fonction des objectifs de sa politique familiale. 
+                          L’ensemble des cotisations sociales (y compris celles relatives aux allocations familiales) à charges des entreprises ou des travailleurs indépendants restent, pour leur fixation et leur collecte, du ressort de l’Etat fédéral. 
+                          Ceci pour éviter des différences dans les taux des cotisations sociales pouvant influencer le choix de localisation des entreprises sur base d’une surenchère entre les Régions.
+                        
+                regional:
                   value:
                     key: 2014_be_regional
                     name: survey_2014_be_regional
@@ -340,15 +342,6 @@ paths:
                         answer_format_tolerance_item_very_important: Very important
                         answer_format_tolerance_item_important: Important
                         answer_format_tolerance_item_not_important: Not important
-                default:
-                  value:
-                    key: 2018_be_district_wallonia_rural
-                    questions_order:
-                      - should_social_care_be_private
-                      - should_watching_the_red_devils_be_mandatory
-                    questions: 
-                      - key: should_social_care_be_private
-                      - key: should_watching_the_red_devils_be_mandatory
   /gps/submission:
     post:
       summary: submit answers
@@ -457,19 +450,23 @@ components:
           $ref: '#/components/parameters/key' # TODO should have path parameter and normal ones
         type:
           type: string
-          enum: [be_federal_chamber_of_representatives]
+          enum: [be_regional, be_municipal, be_provincial]
+        date: # or date ?? 2018-06 -> is ISO valid
+          type: string
+          format: date
         main_election_key:
           type: string
         district_type:
           type: string
-          enum: [province, municipality]
+          enum: [region, province, municipality]
         district_key: 
           $ref: '#/components/parameters/district_key'
-        date: # or date ?? 2018-06 -> is ISO valid
-          type: string
-          format: date
         active: 
           type: boolean
+        districts:
+          type: array
+          items:
+            $ref: '#/components/schemas/election_district'
         parties:
           type: array
           items:
@@ -480,6 +477,19 @@ components:
             $ref: '#/components/schemas/candidate'
         i18n:
           $ref: '#/components/schemas/i18n'
+    election_district:
+      type: object
+      description: an election party with members
+      properties:
+        key:
+          type: string        
+        code:
+          type: string
+        name:
+          type: string #TODO could have i18n ref format
+        type:
+          type: string
+          enum: [region,province,municipality]
     election_party:
       type: object
       description: an election party with members
@@ -540,14 +550,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/election_party'
-    district:
+    district: # where is this used ???
       type: object
       description: an election district
       properties:
         key:
+          type: string        
+        code:
+          type: string #TODO is integer suitable
+        name:
+          type: string #TODO could have i18n ref format
+        type:
           type: string
-        postcode:
-          type: string
+          enum: [region,province,municipality]
         i18n:
           $ref: '#/components/schemas/i18n'
     poll_campaign:
@@ -572,10 +587,8 @@ components:
       properties:
         key: 
           $ref: '#/components/parameters/key'
-        answer_formats:
-          type: array
-          items:
-            $ref: '#/components/schemas/answer_format'
+        name:
+          type: string
         questions_order:
           type: array
           items:
@@ -583,7 +596,11 @@ components:
         questions:
           type: array
           items:
-            $ref: '#/components/schemas/question'
+            $ref: '#/components/schemas/question'        
+        answer_formats:
+          type: array
+          items:
+            $ref: '#/components/schemas/answer_format'
         i18n:
           $ref: '#/components/schemas/i18n'
     question:
@@ -592,6 +609,13 @@ components:
       properties:
         key:
           type: string
+        text:
+          type: string
+        notice:
+          type: string
+        answer_format:
+          type: string
+          enum: [agr_5_scale_tol_3_scale_abs]
         # there is a name and an explanation/notice [excerpt ??]
     answer_format:
       type: object

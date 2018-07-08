@@ -46,7 +46,7 @@ paths:
                 municipal:
                   key: 2018_be_municipal
                   type: be_municipal
-                   date: 2018-10-14T00:00:00.000Z
+                  date: 2018-10-14T00:00:00.000Z
                   district_type: municipality
                   i18n:
                     en:

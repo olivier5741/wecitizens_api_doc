@@ -32,13 +32,14 @@ info:
 # Add a logo
 x-tagGroups:
   - name: vote
-    tags: [election, party, candidate]
+    tags: [election, party, candidate, district]
   - name: gps # maybe find something more appropriate
     tags: [poll, survey, answer, match]
 tags:
   - name: election
   - name: party
   - name: candidate
+  - name: district
   - name: poll
   - name: survey
   - name: answer
@@ -226,6 +227,63 @@ paths:
                       - key: walter_schroons
                         name: Walter Schroons
                         politician_id: politician_be_142
+  /vote/district/search:
+    get:
+      operationId: vote_district_search_get
+      summary: search districts
+      tags: [district]
+      parameters: 
+        - name: key   
+          in: query
+          schema:
+            type: string
+        - name: code     
+          in: query
+          schema:
+            type: string
+        - name: name_contains      
+          in: query
+          schema:
+            type: string
+        - name: main_district_key    
+          in: query
+          schema:
+            type: string
+        - name: election_key
+          in: query
+          schema:
+            type: string
+        - name: types      
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/district_search_response"
+              examples:
+                municipality:
+                  value:
+                    data:
+                      - key: be_6850
+                        code: 6850
+                        type: municipality
+                        name: district_be_6850_name
+                        district_in_keys: [be_wlx,be_wl] # I don't think it's be_wl
+                      - key: be_1435
+                        code: 1435
+                        type: municipality
+                        name: district_be_1435_name     
+                        district_in_keys: [be_wbr,be_wl]                   
+                    i18n:
+                      fr:
+                        district_be_6850_name: Paliseul
+                        district_be_1435_name: Mont-Saint-Guibert
   /gps/campaign/{key}:
     get:
       operationId: gps_campaign_get
@@ -588,21 +646,31 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/election_party'
-    district: # where is this used ???
+    district_search_response: # where is this used ???
       type: object
-      description: an election district
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/district_search_response_item'
+        i18n:
+          $ref: '#/components/schemas/i18n'
+    district_search_response_item: # TODO should find shorter name
+      type: object
       properties:
         key:
           type: string        
         code:
           type: string #TODO is integer suitable
-        name:
-          type: string #TODO could have i18n ref format
         type:
           type: string
-          enum: [region,province,municipality]
-        i18n:
-          $ref: '#/components/schemas/i18n'
+          enum: [region,province,municipality]        
+        name:
+          type: string #TODO could have i18n ref format
+        district_in_keys:
+          type: array
+          items:
+            type: string
     poll_campaign:
       type: object
       description: a poll campaign

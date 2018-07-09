@@ -13,6 +13,22 @@ servers:
 info:
   title: WeCitizens API
   version: '0.4.0'
+  description: |
+    WeCitizens API consists of two endpoints to sustain an electoral GPS app. 
+
+    ## Vote (election)
+
+    Vote is the first endpoint, it's concerned about all what gravitates around an **election**. 
+    An election can have **candidates** and **parties** (parties can have a list of candidates/substitutes).
+    Sometimes elections run across several **districts**. 
+    So there will be a main election with districts and the district election will have candidates/parties and references the main election.
+    
+    ## GPS (survey)
+
+    GPS, the second endpoint, on the other way doesn't care about elections neither politics. Its purpose is to group **questions** into **surveys**. 
+    For a given **poll** find the related survey and **segment** (a group of answers) to match your survey answers against. 
+    Polls can be grouped into **campaigns**. 
+    When the survey is completed, you can go for an answer **submission** and ask for a **match** (who corresponds to my answers).
 # Add a logo
 x-tagGroups:
   - name: vote
@@ -30,6 +46,7 @@ tags:
 paths:
   /vote/election/{key}:
     get:
+      operationId: vote_election_get
       summary: an election
       tags: [election]
       parameters:
@@ -44,17 +61,18 @@ paths:
                 $ref: "#/components/schemas/election"
               examples:
                 municipal:
-                  key: 2018_be_municipal
-                  type: be_municipal
-                  date: 2018-10-14T00:00:00.000Z
-                  district_type: municipality
-                  i18n:
-                    en:
-                      election_type_be_municipal: Municipal elections
-                    fr:
-                      election_type_be_municipal: Élections communales
-                    nl:
-                      election_type_be_municipal: Gemeentelijke verkiezingen
+                  value:
+                    key: 2018_be_municipal
+                    type: be_municipal
+                    date: 2018-10-14T00:00:00.000Z
+                    district_type: municipality
+                    i18n:
+                      en:
+                        election_type_be_municipal: Municipal elections
+                      fr:
+                        election_type_be_municipal: Élections communales
+                      nl:
+                        election_type_be_municipal: Gemeentelijke verkiezingen
                 regional:
                   value:
                     key: 2014_be_regional
@@ -76,6 +94,7 @@ paths:
   # /candidates/{id}:
   /vote/election/{main_election_key}/district/{district_key}: # not sure this is the best way to do it
     get:
+      operationId: vote_election_by_district_get
       summary: a district election
       tags: [election]
       parameters:
@@ -155,6 +174,7 @@ paths:
                         party_key: cdnv
   /vote/party/search:
     get:
+      operationId: vote_party_search_get
       summary: search parties
       tags: [party]
       parameters:
@@ -181,6 +201,7 @@ paths:
                         party_be_cdv_name: CD&V                      
   /vote/candidate/search:
     get:
+      operationId: vote_candidate_search_get
       summary: search candidates
       tags: [candidate]
       parameters:
@@ -207,6 +228,7 @@ paths:
                         politician_id: politician_be_142
   /gps/campaign/{key}:
     get:
+      operationId: gps_campaign_get
       summary: a poll campaign
       tags: [poll]
       parameters:
@@ -225,6 +247,7 @@ paths:
                     key: 2018_be_municipal
   /gps/poll/{key}:
     get:
+      operationId: gps_poll_get
       summary: a poll, related survey and segments
       tags: [poll]
       parameters:
@@ -245,6 +268,7 @@ paths:
                     segment_key: 2018_be_municipal_be_6850_politician
   /gps/survey/{key}:
     get:
+      operationId: gps_survey_get
       summary: a survey and related questions
       tags: [survey]
       parameters:
@@ -356,6 +380,7 @@ paths:
                         answer_format_tolerance_item_not_important: Not important
   /gps/submission:
     post:
+      operationId: gps_submission_post
       summary: submit answers
       tags: [answer]
       requestBody:
@@ -385,7 +410,8 @@ paths:
                 $ref: "#/components/schemas/submission"
   /gps/match:
     post:
-      summary: match answers
+      operationId: gps_match_post
+      summary: find a match to your answers
       tags: [match]
       requestBody:
         content:

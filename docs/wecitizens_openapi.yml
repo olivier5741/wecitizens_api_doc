@@ -482,19 +482,38 @@ components:
       schema:
         type: string
         enum: [en,fr,nl]
-    key:
+    key: &key_param
       name: key  
+      description: |
+        A human readable identifier with pattern matching facilities. 
+        Samples : `2018_be_municipal` for an election, `be_wlx` for a district
+      pattern: '[a-z0-9_]+'
       schema:
         type: string
     key_path:
-      name: key
+      <<: *key_param
       required: true          
       in: path
+    key_query:      
+      <<: *key_param     
+      in: query 
+    code: &code_param
+      name: code     
       schema:
         type: string
-    key_query:
-      name: key        
+    code_query:     
+      <<: *code_param   
       in: query
+    start:
+      name: start   
+      schema:
+        type: integer
+    limit:
+      name: limit   
+      schema:
+        type: integer
+    main_election_key:
+      name: main_election_key
       schema:
         type: string
     main_election_key_path:
@@ -513,6 +532,10 @@ components:
       in: path
       schema:
         type: string
+    district_type:
+      name: district_type
+      type: string
+      enum: [region, province, municipality]
     election_key_query:
       name: election_key      
       in: query
@@ -520,11 +543,6 @@ components:
         type: string
     name_query:
       name: key   
-      in: query
-      schema:
-        type: string
-    code_query:
-      name: code     
       in: query
       schema:
         type: string
@@ -536,6 +554,22 @@ components:
     main_district_key_query:
       name: main_district_key    
       in: query
+      schema:
+        type: string    
+    survey_key:
+      name: survey_key 
+      schema:
+        type: string
+    segment_key:
+      name: segment_key 
+      schema:
+        type: string
+    poll_key:
+      name: poll_key 
+      schema:
+        type: string
+    question_key:
+      name: question_key 
       schema:
         type: string
     type_in_query:
@@ -550,6 +584,8 @@ components:
       type: object
       description: scoped translations
       properties:
+        en:
+          type: object
         nl:
           type: object
         fr:
@@ -563,7 +599,7 @@ components:
         - key
       properties:
         key: 
-          $ref: '#/components/parameters/key' # TODO should have path parameter and normal ones
+          $ref: '#/components/parameters/key'
         type:
           type: string
           enum: [be_regional, be_municipal, be_provincial]
@@ -571,10 +607,9 @@ components:
           type: string
           format: date
         main_election_key:
-          type: string
+          $ref: '#/components/parameters/main_election_key'
         district_type:
-          type: string
-          enum: [region, province, municipality]
+          $ref: '#/components/parameters/district_type'
         district_key: 
           $ref: '#/components/parameters/district_key'
         active: 
@@ -597,10 +632,10 @@ components:
       type: object
       description: an election party with members
       properties:
-        key:
-          type: string        
+        key: 
+          $ref: '#/components/parameters/key'       
         code:
-          type: string
+          $ref: '#/components/parameters/code'    
         name:
           type: string #TODO could have i18n ref format
         type:
@@ -611,7 +646,7 @@ components:
       description: an election party with members
       properties:
         key:
-          type: string
+          $ref: '#/components/parameters/key' 
         name:
           type: string
         candidates:
@@ -629,13 +664,13 @@ components:
         order:
           type: integer
         key:
-          type: string
+          $ref: '#/components/parameters/key' 
     candidate: # they use election_roll
       type: object
       description: an election candidate
       properties:
         key:
-          type: string
+          $ref: '#/components/parameters/key' 
         name:
           type: string    
         picture:
@@ -644,37 +679,47 @@ components:
           type: string
         politician_url:
           type: string
-    candidate_search_response:
+    start_limit_search_response_i:
       type: object
       properties:
         start:
           type: integer
         limit:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/candidate'
-    party_search_response:
-      type: object
+          type: integer    
+    i18n_i:
       properties:
-        start:
-          type: integer
-        limit:
-          type: integer
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/election_party'
-    district_search_response: # where is this used ???
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/district_search_response_item'
         i18n:
           $ref: '#/components/schemas/i18n'
+    candidate_search_response:
+      allOf:
+        - $ref: '#/components/schemas/start_limit_search_response_i'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/candidate'
+    party_search_response:
+      allOf:
+        - $ref: '#/components/schemas/start_limit_search_response_i'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/election_party'
+            i18n:
+              $ref: '#/components/schemas/i18n'
+    district_search_response:
+      allOf:
+        - $ref: '#/components/schemas/start_limit_search_response_i'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/district_search_response_item'        
+        - $ref: '#/components/schemas/i18n_i'
     district_search_response_item: # TODO should find shorter name
       type: object
       properties:
@@ -704,31 +749,31 @@ components:
         key: 
           $ref: '#/components/parameters/key'
         survey_key: 
-          type: string
+          $ref: '#/components/parameters/survey_key'
         segment_key:
-          type: string
+          $ref: '#/components/parameters/segment_key'
     survey:
-      type: object
-      description: a survey with questions
-      properties:
-        key: 
-          $ref: '#/components/parameters/key'
-        name:
-          type: string
-        questions_order:
-          type: array
-          items:
-            type: string
-        questions:
-          type: array
-          items:
-            $ref: '#/components/schemas/question'        
-        answer_formats:
-          type: array
-          items:
-            $ref: '#/components/schemas/answer_format'
-        i18n:
-          $ref: '#/components/schemas/i18n'
+      allOf:
+        - type: object
+          description: a survey with questions
+          properties:
+            key: 
+              $ref: '#/components/parameters/key'
+            name:
+              type: string
+            questions_order:
+              type: array
+              items:
+                type: string
+            questions:
+              type: array
+              items:
+                $ref: '#/components/schemas/question'        
+            answer_formats:
+              type: array
+              items:
+                $ref: '#/components/schemas/answer_format'
+        - $ref: '#/components/schemas/i18n_i'
     question:
       type: object
       description: a question
@@ -786,11 +831,11 @@ components:
           type: string
           format: datetime
         poll_key:
-          type: string
+          $ref: '#/components/parameters/poll_key'
         survey_key:
-          type: string
+          $ref: '#/components/parameters/survey_key'
         segment_key:
-          type: string
+          $ref: '#/components/parameters/segment_key'
         answers:
           type: array
           items:
@@ -804,13 +849,13 @@ components:
         tolerance:
           type: string
         question_key:
-          type: string
+          $ref: '#/components/parameters/question_key'
     match:
       type: object
       description: answers match submission
       properties:
         segment_key:
-          type: string
+          $ref: '#/components/parameters/segment_key'
         answers:
           type: array
           items:

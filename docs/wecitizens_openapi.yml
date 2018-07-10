@@ -51,7 +51,7 @@ paths:
       summary: an election
       tags: [election]
       parameters:
-        - $ref: '#/components/parameters/key'
+        - $ref: '#/components/parameters/key_path'
         - $ref: '#/components/parameters/accept_language'
       responses:
         '200':
@@ -99,8 +99,8 @@ paths:
       summary: a district election
       tags: [election]
       parameters:
-        - $ref: '#/components/parameters/main_election_key'
-        - $ref: '#/components/parameters/district_key'
+        - $ref: '#/components/parameters/main_election_key_path'
+        - $ref: '#/components/parameters/district_key_path'
         - $ref: '#/components/parameters/accept_language'
       responses:
         '200':
@@ -179,7 +179,7 @@ paths:
       summary: search parties
       tags: [party]
       parameters:
-        - $ref: '#/components/parameters/election_key'
+        - $ref: '#/components/parameters/election_key_query'
         - $ref: '#/components/parameters/accept_language'
       responses:
         '200':
@@ -206,7 +206,7 @@ paths:
       summary: search candidates
       tags: [candidate]
       parameters:
-        - $ref: '#/components/parameters/election_key'
+        - $ref: '#/components/parameters/election_key_query'
       responses:
         '200':
           description: success
@@ -233,32 +233,12 @@ paths:
       summary: search districts
       tags: [district]
       parameters: 
-        - name: key   
-          in: query
-          schema:
-            type: string
-        - name: code     
-          in: query
-          schema:
-            type: string
-        - name: name_contains      
-          in: query
-          schema:
-            type: string
-        - name: main_district_key    
-          in: query
-          schema:
-            type: string
-        - name: election_key
-          in: query
-          schema:
-            type: string
-        - name: types      
-          in: query
-          schema:
-            type: array
-            items:
-              type: string
+        - $ref: '#/components/parameters/key_query'
+        - $ref: '#/components/parameters/code_query'
+        - $ref: '#/components/parameters/name_contains_query'
+        - $ref: '#/components/parameters/main_district_key_query'
+        - $ref: '#/components/parameters/election_key_query'
+        - $ref: '#/components/parameters/type_in_query'
       responses:
         '200':
           description: success
@@ -290,7 +270,7 @@ paths:
       summary: a poll campaign
       tags: [poll]
       parameters:
-        - $ref: '#/components/parameters/key'
+        - $ref: '#/components/parameters/key_path'
         - $ref: '#/components/parameters/accept_language'
       responses:
         '200':
@@ -309,7 +289,7 @@ paths:
       summary: a poll, related survey and segments
       tags: [poll]
       parameters:
-        - $ref: '#/components/parameters/key'
+        - $ref: '#/components/parameters/key_path'
         - $ref: '#/components/parameters/accept_language'
       responses:
         '200':
@@ -330,7 +310,7 @@ paths:
       summary: a survey and related questions
       tags: [survey]
       parameters:
-        - $ref: '#/components/parameters/key'
+        - $ref: '#/components/parameters/key_path'
         - $ref: '#/components/parameters/accept_language'
       responses:
         '200':
@@ -503,12 +483,21 @@ components:
         type: string
         enum: [en,fr,nl]
     key:
+      name: key  
+      schema:
+        type: string
+    key_path:
       name: key
       required: true          
       in: path
       schema:
         type: string
-    main_election_key:
+    key_query:
+      name: key        
+      in: query
+      schema:
+        type: string
+    main_election_key_path:
       name: main_election_key
       required: true          
       in: path
@@ -516,15 +505,46 @@ components:
         type: string
     district_key:
       name: district_key
+      schema:
+        type: string
+    district_key_path:
+      name: district_key
       required: true          
       in: path
       schema:
         type: string
-    election_key:
+    election_key_query:
       name: election_key      
       in: query
       schema:
         type: string
+    name_query:
+      name: key   
+      in: query
+      schema:
+        type: string
+    code_query:
+      name: code     
+      in: query
+      schema:
+        type: string
+    name_contains_query:
+      name: name_contains      
+      in: query
+      schema:
+        type: string
+    main_district_key_query:
+      name: main_district_key    
+      in: query
+      schema:
+        type: string
+    type_in_query:
+      name: type_in     
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
   schemas:
     i18n:
       type: object

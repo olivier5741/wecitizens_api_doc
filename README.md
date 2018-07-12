@@ -35,6 +35,13 @@ Belgian provinces and regions : https://en.wikipedia.org/wiki/ISO_3166-2:BE
 4. Find related poll through [/gps/poll/2018_be_municipal_be_6850.json](/docs/api/gps/poll/2018_be_municipal_be_6850.json) so you get the survey key.
 5. Get the survey through [/gps/survey/2018_be_municipal_wallonia_rural.json](/docs/api/gps/survey/2018_be_municipal_wallonia_rural.json)
 
+## API generation
+
+Specs could generate nodejs API through
+
+* https://github.com/Mermade/openapi-codegen
+* https://loopback.io/doc/en/lb4/OpenAPI-generator.html (test draft on https://github.com/olivier5741/wecitizens-api-test)
+
 
 
 

@@ -446,7 +446,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/submission"
-  /gps/submission/{key}:
+  /gps/submission/{id}:
     get:
       operationId: gps_submission_get
       summary: inspect an answer submission
@@ -515,68 +515,68 @@ components:
   parameters:
     accept_language:
       name: Accept-Language
+      in: header
       schema:
         type: string
         enum: [en,fr,nl]   
-    id: &id_param
+    id_path:
+      required: true          
+      in: path
       name: id
       description: |
         A UUID identifier
       schema:
         type: string
         format: uuid
-    id_path:
-      <<: *id_param
-      required: true          
-      in: path
-    key: &key_param
+    key_path:
       name: key  
       description: |
         A human readable identifier with pattern matching facilities. 
         Samples : `2018_be_municipal` for an election, `be_wlx` for a district
-      pattern: '[a-z0-9_]+'
       schema:
         type: string
-    key_path:
-      <<: *key_param
+        pattern: '[a-z0-9_]+'
       required: true          
       in: path
-    key_query:      
-      <<: *key_param     
-      in: query 
-    code: &code_param
-      name: code    
-      example: 6850
+    key_query:
+      name: key  
+      description: |
+        A human readable identifier with pattern matching facilities. 
+        Samples : `2018_be_municipal` for an election, `be_wlx` for a district
       schema:
         type: string
-    code_query:     
-      <<: *code_param   
+        pattern: '[a-z0-9_]+'
+      required: true          
       in: query
-    main_election_key: &main_election_key_param
+    code_query:     
+      name: code    
+      in: query
+      example: 6850
+      schema:
+        type: string 
+    main_election_key_path:
       name: main_election_key
       example: 2018_be_municipal
       schema:
         type: string
-    main_election_key_path:
-      <<: *main_election_key_param
       required: true          
       in: path
-    district_key: &district_key_param
+    district_key_path:
       name: district_key
       description: The key of the district
       example: be_6850
       schema:
         type: string
-    district_key_path:
-      <<: *district_key_param  
       required: true          
       in: path
     district_type:
       name: district_type
+      in: query
       description: The type of district
-      type: string
       example: municipality
-      enum: [region, province, municipality]
+      schema:
+        type: string
+        enum: [region, province, municipality]
     election_key_query:
       name: election_key      
       in: query
@@ -599,24 +599,28 @@ components:
         type: string    
     survey_key:
       name: survey_key 
+      in: query
       description: The key of the survey
       example: 2018_be_municipal_brussels
       schema:
         type: string
     segment_key:
       name: segment_key 
+      in: query
       description: The key of the segment
       example: 2018_be_municipal_be_6850_politician
       schema:
         type: string
     poll_key:
       name: poll_key 
+      in: query
       description: The key of the election poll
       example: 2018_be_municipal_be_6850
       schema:
         type: string
     question_key:
       name: question_key 
+      in: query
       description: The key of the question
       example: question_63
       schema:
@@ -629,6 +633,54 @@ components:
         items:
           type: string
   schemas:
+    id:
+      type: string
+      format: uuid
+      description: |
+        A UUID identifier 
+    key:      
+      type: string 
+      description: |
+        A human readable identifier with pattern matching facilities. 
+        Samples : `2018_be_municipal` for an election, `be_wlx` for a district
+      pattern: '[a-z0-9_]+'
+    code:
+      type: string
+      example: 6850
+    main_election_key:
+      type: string
+      example: 2018_be_municipal
+    district_key:
+      description: The key of the district
+      example: be_6850
+      type: string
+    district_type:
+      description: The type of district
+      example: municipality
+      type: string
+      enum: [region, province, municipality]
+    election_key:
+      type: string
+    name:
+      type: string
+    main_district_key:
+      type: string    
+    survey_key:
+      description: The key of the survey
+      example: 2018_be_municipal_brussels
+      type: string
+    segment_key:
+      description: The key of the segment
+      example: 2018_be_municipal_be_6850_politician
+      type: string
+    poll_key:
+      description: The key of the election poll
+      example: 2018_be_municipal_be_6850
+      type: string
+    question_key:
+      description: The key of the question
+      example: question_63
+      type: string   
     i18n:
       type: object
       description: Scoped translations
@@ -648,7 +700,7 @@ components:
         - key
       properties:
         key: 
-          $ref: '#/components/parameters/key'
+          $ref: '#/components/schemas/key'
         type:
           type: string
           enum: [be_regional, be_municipal, be_provincial]
@@ -656,11 +708,11 @@ components:
           type: string
           format: date
         main_election_key:
-          $ref: '#/components/parameters/main_election_key'
+          $ref: '#/components/schemas/main_election_key'
         district_type:
-          $ref: '#/components/parameters/district_type'
+          $ref: '#/components/schemas/district_type'
         district_key: 
-          $ref: '#/components/parameters/district_key'
+          $ref: '#/components/schemas/district_key'
         active: 
           type: boolean
         districts:
@@ -682,9 +734,9 @@ components:
       description: an election party with members
       properties:
         key: 
-          $ref: '#/components/parameters/key'       
+          $ref: '#/components/schemas/key'       
         code:
-          $ref: '#/components/parameters/code'    
+          $ref: '#/components/schemas/code'    
         name:
           type: string #TODO could have i18n ref format
         type:
@@ -695,7 +747,7 @@ components:
       description: an election party with members
       properties:
         key:
-          $ref: '#/components/parameters/key' 
+          $ref: '#/components/schemas/key' 
         name:
           type: string
         candidates:
@@ -713,13 +765,13 @@ components:
         order:
           type: integer
         key:
-          $ref: '#/components/parameters/key' 
+          $ref: '#/components/schemas/key' 
     candidate: # they use election_roll
       type: object
       description: An election candidate
       properties:
         key:
-          $ref: '#/components/parameters/key' 
+          $ref: '#/components/schemas/key' 
         name:
           type: string    
         picture:
@@ -792,24 +844,24 @@ components:
       description: a poll campaign
       properties:
         key: 
-          $ref: '#/components/parameters/key'
+          $ref: '#/components/schemas/key'
     poll:
       type: object
       description: a poll
       properties:
         key: 
-          $ref: '#/components/parameters/key'
+          $ref: '#/components/schemas/key'
         survey_key: 
-          $ref: '#/components/parameters/survey_key'
+          $ref: '#/components/schemas/survey_key'
         segment_key:
-          $ref: '#/components/parameters/segment_key'
+          $ref: '#/components/schemas/segment_key'
     survey:
       allOf:
         - type: object
           description: a survey with questions
           properties:
             key: 
-              $ref: '#/components/parameters/key'
+              $ref: '#/components/schemas/key'
             name:
               type: string
             questions_order:
@@ -844,7 +896,7 @@ components:
       description: an answer format
       properties:
         key: 
-          $ref: '#/components/parameters/key'
+          $ref: '#/components/schemas/key'
         items:
           type: array
           items:
@@ -864,7 +916,7 @@ components:
       type: object    
       properties:
         key: 
-          $ref: '#/components/parameters/key' # trouble with this in swagger_uis
+          $ref: '#/components/schemas/key' # trouble with this in swagger_uis
         name:
           type: string
         weight:
@@ -874,19 +926,17 @@ components:
       description: answers submission
       properties:
         id:
-          readOnly: true
-          type: string
-          format: uuid
+          $ref: '#/components/schemas/id'
         time:
           readOnly: true
           type: string
           format: datetime
         poll_key:
-          $ref: '#/components/parameters/poll_key'
+          $ref: '#/components/schemas/poll_key'
         survey_key:
-          $ref: '#/components/parameters/survey_key'
+          $ref: '#/components/schemas/survey_key'
         segment_key:
-          $ref: '#/components/parameters/segment_key'
+          $ref: '#/components/schemas/segment_key'
         answers:
           type: array
           items:
@@ -900,13 +950,13 @@ components:
         tolerance:
           type: string
         question_key:
-          $ref: '#/components/parameters/question_key'
+          $ref: '#/components/schemas/question_key'
     match:
       type: object
       description: answers match submission
       properties:
         segment_key:
-          $ref: '#/components/parameters/segment_key'
+          $ref: '#/components/schemas/segment_key'
         answers:
           type: array
           items:

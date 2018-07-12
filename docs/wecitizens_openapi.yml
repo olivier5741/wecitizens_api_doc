@@ -498,43 +498,37 @@ components:
       <<: *key_param     
       in: query 
     code: &code_param
-      name: code     
+      name: code    
+      example: 6850
       schema:
         type: string
     code_query:     
       <<: *code_param   
       in: query
-    start:
-      name: start   
-      schema:
-        type: integer
-    limit:
-      name: limit   
-      schema:
-        type: integer
-    main_election_key:
+    main_election_key: &main_election_key_param
       name: main_election_key
+      example: 2018_be_municipal
       schema:
         type: string
     main_election_key_path:
-      name: main_election_key
+      <<: *main_election_key_param
       required: true          
       in: path
-      schema:
-        type: string
-    district_key:
+    district_key: &district_key_param
       name: district_key
+      description: The key of the district
+      example: be_6850
       schema:
         type: string
     district_key_path:
-      name: district_key
+      <<: *district_key_param  
       required: true          
       in: path
-      schema:
-        type: string
     district_type:
       name: district_type
+      description: The type of district
       type: string
+      example: municipality
       enum: [region, province, municipality]
     election_key_query:
       name: election_key      
@@ -558,18 +552,26 @@ components:
         type: string    
     survey_key:
       name: survey_key 
+      description: The key of the survey
+      example: 2018_be_municipal_brussels
       schema:
         type: string
     segment_key:
       name: segment_key 
+      description: The key of the segment
+      example: 2018_be_municipal_be_6850_politician
       schema:
         type: string
     poll_key:
       name: poll_key 
+      description: The key of the election poll
+      example: 2018_be_municipal_be_6850
       schema:
         type: string
     question_key:
       name: question_key 
+      description: The key of the question
+      example: question_63
       schema:
         type: string
     type_in_query:
@@ -582,7 +584,7 @@ components:
   schemas:
     i18n:
       type: object
-      description: scoped translations
+      description: Scoped translations
       properties:
         en:
           type: object
@@ -659,7 +661,7 @@ components:
             $ref: '#/components/schemas/election_party_candidate'
     election_party_candidate:
       type: object
-      description: an election party member
+      description: An election party member
       properties:
         order:
           type: integer
@@ -667,7 +669,7 @@ components:
           $ref: '#/components/parameters/key' 
     candidate: # they use election_roll
       type: object
-      description: an election candidate
+      description: An election candidate
       properties:
         key:
           $ref: '#/components/parameters/key' 
@@ -683,9 +685,11 @@ components:
       type: object
       properties:
         start:
-          type: integer
+          type: integer  
+          description: paging first item where to begin the page
         limit:
-          type: integer    
+          type: integer              
+          description: paging max amount of items
     i18n_i:
       properties:
         i18n:

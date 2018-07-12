@@ -428,7 +428,7 @@ paths:
               $ref: "#/components/schemas/submission"
             examples:
               default:
-                value:                  
+                value: &submission_example_default                  
                   poll_key: 2018_be_district_6850
                   survey_key: 2018_be_district_wallonia_rural
                   segment_key: 2018_be_district_6850
@@ -442,6 +442,42 @@ paths:
       responses:
         '201':
           description: created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/submission"
+  /gps/submission/{key}:
+    get:
+      operationId: gps_submission_get
+      summary: inspect an answer submission
+      tags: [answer]
+      parameters:
+        - $ref: '#/components/parameters/id_path'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/submission"
+    put:
+      operationId: gps_submission_put
+      summary: update an answer submission
+      tags: [answer]
+      parameters:
+        - $ref: '#/components/parameters/id_path'
+      requestBody:
+        content:
+          application/json:     
+            schema:
+              $ref: "#/components/schemas/submission"
+            examples:
+              default:
+                value:   
+                  <<: *submission_example_default              
+      responses:
+        '200':
+          description: success
           content:
             application/json:
               schema:
@@ -481,7 +517,18 @@ components:
       name: Accept-Language
       schema:
         type: string
-        enum: [en,fr,nl]
+        enum: [en,fr,nl]   
+    id: &id_param
+      name: id
+      description: |
+        A UUID identifier
+      schema:
+        type: string
+        format: uuid
+    id_path:
+      <<: *id_param
+      required: true          
+      in: path
     key: &key_param
       name: key  
       description: |

@@ -1,6 +1,7 @@
 # languages : en, fr, nl, de
 # what is an institution and an authority
 # add path to get all elections + path for active elections
+# 201 not supported by loopback 4 generation
 
 openapi: 3.0.0
 servers:
@@ -440,7 +441,7 @@ paths:
                       tolerance: not_important
                       question_key: should_watching_the_red_devils_be_mandatory
       responses:
-        '201':
+        '200':
           description: created
           content:
             application/json:
@@ -506,6 +507,10 @@ paths:
       responses:
         '200':
           description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/match"
 components:
   headers:
     Accept-Language:
@@ -516,9 +521,12 @@ components:
     accept_language:
       name: Accept-Language
       in: header
+      description: The language
       schema:
-        type: string
-        enum: [en,fr,nl]   
+        type: array
+        example: [en,fr,nl]
+        items:
+          type: string
     id_path:
       required: true          
       in: path

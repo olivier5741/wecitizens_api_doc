@@ -21,7 +21,7 @@ info:
     ## Vote (election)
 
     Vote is the first endpoint, it's concerned about all what gravitates around an **election**. 
-    An election can have **candidates** and **parties** (parties can have a list of candidates/substitutes).
+    An election can have **candidates** and **parties** (parties can have a list of candidates).
     Sometimes elections run across several **districts**. 
     So there will be a main election with districts and the district election will have candidates/parties and references the main election.
     
@@ -389,7 +389,7 @@ paths:
                 $ref: "#/components/schemas/submission"
     put:
       operationId: gps_submission_put
-      summary: update an answer submission
+      summary: Update an answer submission
       tags: [answer]
       parameters:
         - $ref: '#/components/parameters/id_path'

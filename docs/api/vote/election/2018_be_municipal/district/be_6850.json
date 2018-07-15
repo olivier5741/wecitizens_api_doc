@@ -12,15 +12,15 @@
       "candidates": [
         {
           "order": 1,
-          "key": "patricia.jadot"
+          "key": "patrilia.jarot"
         },
         {
           "order": 2,
-          "key": "olivier.boel"
+          "key": "olivia.boel"
         },
         {
           "order": 3,
-          "key": "claire.grandjean"
+          "key": "clair.grantjean"
         }
       ]
     },
@@ -30,30 +30,30 @@
       "candidates": [
         {
           "order": 1,
-          "key": "culot.gerard"
+          "key": "cunot.gemard"
         }
       ]
     }
   ],
   "candidates": [
     {
-      "key": "patricia.jadot",
-      "fullname": "Patricia Jadot",
+      "key": "patrilia.jarot",
+      "fullname": "Patrilia Jarot",
       "politician_id": "politician_be_1048"
     },
     {
-      "key": "olivier.boel",
-      "fullname": "Olivier Boël",
+      "key": "olivia.boal",
+      "fullname": "Olivia Baël",
       "politician_id": "politician_be_1523"
     },
     {
-      "key": "claire.grandjean",
-      "fullname": "Claire Grandjean",
+      "key": "clair.grantjean",
+      "fullname": "Clair Grantjean",
       "politician_id": "politician_be_1430"
     },
     {
-      "key": "culot.gerard",
-      "fullname": "Gérard Culot",
+      "key": "cunot.gemard",
+      "fullname": "Gémard Cunot",
       "politician_id": "politician_be_1801"
     }
   ],

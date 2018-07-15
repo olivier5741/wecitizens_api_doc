@@ -84,8 +84,9 @@ paths:
   /vote/election/{key}:
     get:
       operationId: vote_election_get
-      summary: an election
+      summary: An election
       tags: [election]
+      description: For first app release, GET `2018_be_municipal`
       parameters:
         - $ref: '#/components/parameters/key_path'
         - $ref: '#/components/parameters/accept_language'
@@ -115,8 +116,9 @@ paths:
   /vote/election/{main_election_key}/district/{district_key}: # not sure this is the best way to do it
     get:
       operationId: vote_election_by_district_get
-      summary: a district election
+      summary: A district election
       tags: [election]
+      description: For first app release, set the main election key (`2018_be_municipal`) to  `main_election_key` and `district_key` depends on what the voter chose as district (drop down list)
       parameters:
         - $ref: '#/components/parameters/main_election_key_path'
         - $ref: '#/components/parameters/district_key_path'
@@ -142,28 +144,28 @@ paths:
                         name: be_ecolo_name
                         candidates:
                           - order: 1
-                            key: patricia.jadot
+                            key: patrilia.jarot
                           - order: 2
-                            key: olivier.boel
+                            key: olivia.boel
                           - order: 3
-                            key: claire.grandjean
+                            key: clair.grantjean
                       - key: be_6850_independant
                         name: be_6850_independant_name
                         candidates:
                           - order: 1
-                            key: culot.gerard
+                            key: cunot.gemard
                     candidates:
-                      - key: patricia.jadot
-                        fullname: Patricia Jadot
+                      - key: patrilia.jarot
+                        fullname: Patrilia Jarot
                         politician_id: politician_be_1048
-                      - key: olivier.boel
-                        fullname: Olivier Boël
+                      - key: olivia.boal
+                        fullname: Olivia Baël
                         politician_id: politician_be_1523
-                      - key: claire.grandjean
-                        fullname: Claire Grandjean
+                      - key: clair.grantjean
+                        fullname: Clair Grantjean
                         politician_id: politician_be_1430
-                      - key: culot.gerard
-                        fullname: Gérard Culot
+                      - key: cunot.gemard
+                        fullname: Gémard Cunot
                         politician_id: politician_be_1801
                     i18n:
                       en:
@@ -179,13 +181,13 @@ paths:
   /vote/district/search:
     get:
       operationId: vote_district_search_get
-      summary: search districts
+      summary: Search districts
       tags: [district]
+      description: For first app release, set the main election key (`2018_be_municipal`) to `election_key` and whether the voter enters a number or not use `code_contains` or `name_contains`
       parameters:      
         - $ref: '#/components/parameters/election_key_query'
         - $ref: '#/components/parameters/code_contains_query'
-        - $ref: '#/components/parameters/name_contains_query'        
-        - $ref: '#/components/parameters/key_query'   
+        - $ref: '#/components/parameters/name_contains_query'
       responses:
         '200':
           description: success
@@ -214,8 +216,9 @@ paths:
   /gps/campaign/{key}:
     get:
       operationId: gps_campaign_get
-      summary: a poll campaign
+      summary: A poll campaign
       tags: [poll]
+      description: For first app release, set `key` as `{main_election_key}_voter` (sample `2018_be_municipal_voter`). You need to query this to get number of submissions.
       parameters:
         - $ref: '#/components/parameters/key_path'
         - $ref: '#/components/parameters/accept_language'
@@ -229,12 +232,14 @@ paths:
               examples:
                 default:
                   value:
-                    key: 2018_be_municipal
+                    key: 2018_be_municipal_voter
+                    submission_sum: 65748
   /gps/poll/{key}:
     get:
       operationId: gps_poll_get
-      summary: a poll, related survey and segments
+      summary: A poll, related survey and segments
       tags: [poll]
+      description: For first app release, set the poll `key` as `{main_election_key}_{district_key}_voter`
       parameters:
         - $ref: '#/components/parameters/key_path'
         - $ref: '#/components/parameters/accept_language'
@@ -248,13 +253,14 @@ paths:
               examples:
                 default:
                   value:
-                    key: 2018_be_municipal_be_6850
+                    key: 2018_be_municipal_be_6850_voter
                     survey_key: 2018_be_municipal_wallonia_rural
-                    segment_key: 2018_be_municipal_be_6850_politician
+                    segment_keys: [2018_be_municipal_be_6850_politician,2018_be_municipal_be_6850_party]
+                    insufficient_data: false
   /gps/survey/{key}:
     get:
       operationId: gps_survey_get
-      summary: a survey and related questions
+      summary: A survey and related questions
       tags: [survey]
       parameters:
         - $ref: '#/components/parameters/key_path'
@@ -267,7 +273,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/survey"
               examples:
-                municipal:
+                default:
                   value:
                     key: 2018_be_municipal_wallonia_rural
                     name: survey_2018_be_municipal_wallonia_rural
@@ -331,42 +337,13 @@ paths:
                           Dans la Région de Bruxelles-Capitale, le transfert aura lieu à la Commission communautaire commune dont relève l’ensemble des francophones et des néerlandophones y domiciliés. 
                           Chaque entité pourra adopter sa propre clef de répartition et fixera, de manière autonome, ses critères de répartition en fonction des objectifs de sa politique familiale. 
                           L’ensemble des cotisations sociales (y compris celles relatives aux allocations familiales) à charges des entreprises ou des travailleurs indépendants restent, pour leur fixation et leur collecte, du ressort de l’Etat fédéral. 
-                          Ceci pour éviter des différences dans les taux des cotisations sociales pouvant influencer le choix de localisation des entreprises sur base d’une surenchère entre les Régions.
-                        
-                regional:
-                  value:
-                    key: 2014_be_regional
-                    name: survey_2014_be_regional
-                    answer_formats: *answerFormat   
-                    question_order:
-                      - legal_retirement_age_should_be_increased_65_to_67
-                      - turkey_may_join_eu
-                    questions:
-                      - key: legal_retirement_age_should_be_increased_65_to_67
-                        notice: Some notice
-                        answer_format: agr_5_scale_tol_3_scale_abs
-                      - key: turkey_may_join_eu
-                        notice: Some notice
-                        answer_format: agr_5_scale_tol_3_scale_abs
-                    i18n:
-                      fr:
-                        survey_2014_be_regional: Elections régionales 2014    
-                      en:
-                        question_legal_retirement_age_should_be_increased_65_to_67: The legal retirement age should be increased from 65 to 67 years.    
-                        question_turkey_may_join_eu: Turkey may join the European Union.
-                        answer_format_item_fully_agree: Fully agree
-                        answer_format_item_rather_yes: Rather yes
-                        answer_format_item_no_opinion: No opinion
-                        answer_format_item_rather_no: Rather no
-                        answer_format_item_strongly_disagree: Strongly disagree
-                        answer_format_tolerance_absolute: Absolute
-                        answer_format_tolerance_item_very_important: Very important
-                        answer_format_tolerance_item_important: Important
-                        answer_format_tolerance_item_not_important: Not important
+                          Ceci pour éviter des différences dans les taux des cotisations sociales pouvant influencer le choix de localisation des entreprises sur base d’une surenchère entre les Régions.                        
   /gps/submission:
     post:
       operationId: gps_submission_post
-      summary: submit answers
+      summary: Submit answers
+      description: |
+        > Do not fill in `segment_key` when this is a voter submission
       tags: [answer]
       requestBody:
         content:
@@ -378,7 +355,10 @@ paths:
                 value: &submission_example_default                  
                   poll_key: 2018_be_district_6850
                   survey_key: 2018_be_district_wallonia_rural
-                  segment_key: 2018_be_district_6850
+                  user:
+                    id: 92534fc0-0773-4f16-a234-e0191e8e7214
+                    age_level: under_35
+                    last_election_vote_names: Gémard Cunot
                   answers: 
                     - value: strongly_no
                       tolerance: important
@@ -396,7 +376,7 @@ paths:
   /gps/submission/{id}:
     get:
       operationId: gps_submission_get
-      summary: inspect an answer submission
+      summary: Inspect an answer submission
       tags: [answer]
       parameters:
         - $ref: '#/components/parameters/id_path'
@@ -432,7 +412,7 @@ paths:
   /gps/match:
     post:
       operationId: gps_match_post
-      summary: find a match to your answers
+      summary: Find a match to your answers
       tags: [match]
       requestBody:
         content:
@@ -442,7 +422,7 @@ paths:
             examples:
               default:
                 value:
-                  segment_key: 2018_be_district_6850_candidates
+                  segment_key: 2018_be_district_6850_candidate
                   answers: 
                     - value: strongly_no
                       tolerance: important
@@ -456,7 +436,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/match"
+                $ref: "#/components/schemas/match_response"
 components:
   headers:
     Accept-Language:
@@ -466,7 +446,8 @@ components:
   parameters:
     accept_language:
       name: Accept-Language
-      in: header
+      in: header      
+      deprecated: true
       description: The language
       schema:
         type: array
@@ -496,7 +477,7 @@ components:
       name: key  
       description: |
         A human readable identifier with pattern matching facilities. 
-        Samples : `2018_be_municipal` for an election, `be_wlx` for a district
+        Samples : `2018_be_municipal` for an election, `be_6850` for a district
       schema:
         type: string
         pattern: '[a-z0-9_]+'
@@ -821,8 +802,13 @@ components:
           $ref: '#/components/schemas/key'
         survey_key: 
           $ref: '#/components/schemas/survey_key'
-        segment_key:
-          $ref: '#/components/schemas/segment_key'
+        segment_keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/segment_key'
+        insufficient_data:
+          type: boolean
+          description: whether there is enough registered candidates for the voter to do the survey
     survey:
       allOf:
         - type: object
@@ -891,7 +877,7 @@ components:
           type: integer # TODO find format for double 
     submission:
       type: object
-      description: answers submission
+      description: Answers submission
       properties:
         id:
           $ref: '#/components/schemas/id'
@@ -905,10 +891,26 @@ components:
           $ref: '#/components/schemas/survey_key'
         segment_key:
           $ref: '#/components/schemas/segment_key'
+        user:
+          $ref: '#/components/schemas/submission_user'
+        incomplete:
+          type: boolean          
+          readOnly: true
+          description: When this is a candidate or a party submission we need to know if all questions where answered
         answers:
           type: array
           items:
             $ref: '#/components/schemas/answer'
+    submission_user:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/id'
+        age_level:
+          type: string
+          example: under_35
+        last_election_vote_names:
+          type: string          
     answer:
       type: object
       description: an answer
@@ -921,7 +923,7 @@ components:
           $ref: '#/components/schemas/question_key'
     match:
       type: object
-      description: answers match submission
+      description: Answers match submission
       properties:
         segment_key:
           $ref: '#/components/schemas/segment_key'
@@ -929,3 +931,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/answer'
+    match_response:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/match_response_item'
+    match_response_item:
+      type: object
+      properties:
+        order:
+          type: integer
+        user_id:
+          type: string
+        score:
+          type: double
+          example: 75.3
+

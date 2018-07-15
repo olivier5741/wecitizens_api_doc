@@ -919,7 +919,7 @@ components:
         name:
           type: string
         weight:
-          type: integer # TODO find format for double 
+          type: number
     submission:
       type: object
       description: Answers submission
@@ -991,7 +991,7 @@ components:
         user_id:
           type: string
         score:
-          type: double
+          type: number
           example: 75.3
     politician:
       type: object

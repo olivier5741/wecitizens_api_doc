@@ -2,6 +2,7 @@
 # what is an institution and an authority
 # add path to get all elections + path for active elections
 # 201 not supported by loopback 4 generation
+# why not give information about the mandate of the election (how long, ...)
 
 openapi: 3.0.0
 servers:
@@ -30,6 +31,42 @@ info:
     For a given **poll** find the related survey and **segment** (a group of answers) to match your survey answers against. 
     Polls can be grouped into **campaigns**. 
     When the survey is completed, you can go for an answer **submission** and ask for a **match** (who corresponds to my answers).
+
+    # Internationalization
+
+    > Language filtering will be available through HTTP header `Accept-Language` but not currently implemented.
+    > You'll be served all languages (currently max 3 or 4)
+
+    Election, party, district and survey have properties which depend on the language (`name`, `notice`, ...).
+    The value of the property will be a reference to a key in the language dictionnary of `i18n` property.
+
+    `i18n` is build to be fed to https://www.i18next.com/ framework
+
+    ## Election sample
+
+    `type_name` value references `i18n.{language}.election_type_be_municipal_name` property
+
+    ```json
+    {
+      "key": "2018_be_municipal",
+      "type": "be_municipal",
+      "type_name": "election_type_be_municipal_name"
+      "date": "2018-10-14T00:00:00.000Z",
+      "district_type": "municipality",
+      "i18n": {
+        "en": {
+          "election_type_be_municipal_name": "Municipal elections"
+        },
+        "fr": {
+          "election_type_be_municipal_name": "Élections communales"
+        },
+        "nl": {
+          "election_type_be_municipal_name": "Gemeentelijke verkiezingen"
+        }
+      }
+    }
+    ```  
+
 # Add a logo
 x-tagGroups:
   - name: vote
@@ -62,10 +99,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/election"
               examples:
-                municipal:
+                default:
                   value:
                     key: 2018_be_municipal
                     type: be_municipal
+                    type_name: election_type_be_municipal_name
                     date: 2018-10-14T00:00:00.000Z
                     district_type: municipality
                     i18n:
@@ -75,24 +113,6 @@ paths:
                         election_type_be_municipal: Élections communales
                       nl:
                         election_type_be_municipal: Gemeentelijke verkiezingen
-                regional:
-                  value:
-                    key: 2014_be_regional
-                    type: be_regional
-                    date: 2014-05-25T00:00:00.000Z
-                    district_type: region
-                    districts:
-                      - key: be_ed
-                        name: district_be_german_electoral_college
-                      - key: be_ef
-                        name: district_be_french_electoral_college
-                      - key: be_en
-                        name: district_be_dutch_electoral_college
-                    i18n:
-                      en:
-                        district_be_regional_german_electoral_college: German electoral college
-                        district_be_regional_french_electoral_college: French electoral college
-                        district_be_regional_dutch_electoral_college: Dutch electoral college
   # /candidates/{id}:
   /vote/election/{main_election_key}/district/{district_key}: # not sure this is the best way to do it
     get:
@@ -111,71 +131,57 @@ paths:
               schema:
                 $ref: "#/components/schemas/election"
               examples:
-                compatibility:
-                  value:
-                    key: 2018_be_federal_chamber_of_representatives_van
-                    type: be_federal_chamber_of_representatives                    
-                    date: 2017-05-17
-                    main_election_key: 2018_be_federal_chamber_of_representatives
-                    district_type: province # not sure it's the right term
-                    district_key: be_van
-                    parties:
-                      - key: be_bub
-                        name: party_be_bub_name
-                        candidates:
-                          - order: 1
-                            key: joeri_pen
-                      - key: be_cdv
-                        name: party_be_cdv_name
-                        candidates:
-                          - order: 1
-                            key: servais_verherstraeten
-                          - order: 2
-                            key: nahima_lanjri
-                        substitutes:
-                          - order: 1
-                            key: walter_schroons
-                    candidates:
-                      - key: servais_verherstraeten
-                        name: Servais Verherstraeten
-                        politician_id: politician_be_232
-                      - key: nahima_lanjri
-                        name: Nahima Lanjri
-                        politician_id: politician_be_142
-                      - key: walter_schroons
-                        name: Walter Schroons
-                        politician_id: politician_be_142
-                    i18n:
-                      en:
-                        party_be_bub_name: B.U.B
-                        party_be_cdv_name: CD&V
-                        election_type_be_federal_chamber_of_representatives: Federal Chamber of Representatives # maybe already loaded
-                      nl:
-                        district_be_fa: Antwerp # maybe already loaded
                 default: # TODO : adapt according to sample above 
                   value:
                     key: 2018_be_municipal_6850
+                    type: be_municipal
+                    type_name: election_type_be_municipal_name
+                    date: 2018-10-14T00:00:00.000Z
                     main_election_key: 2018_be_municipal
                     district_key: be_municipal_6850
                     parties:
-                      - key: cdnv
-                        name: CDN-V
+                      - key: be_6850_ecolo
+                        name: be_ecolo_name
                         candidates:
                           - order: 1
-                            key: o.wouters
-                      - key: ecolo
-                        name: Ecolo
+                            key: patricia.jadot
+                          - order: 2
+                            key: olivier.boel
+                          - order: 3
+                            key: claire.grandjean
+                      - key: be_6850_independant
+                        name: be_6850_independant_name
                         candidates:
                           - order: 1
-                            key: d.sum
+                            key: culot.gerard
                     candidates:
-                      - key: o.wouters
-                        fullname: Olivier Wouters
-                      - key: d.sum
-                        fullname: Daniel Sum
-                        party_key: cdnv
+                      - key: patricia.jadot
+                        fullname: Patricia Jadot
+                        politician_id: politician_be_1048
+                      - key: olivier.boel
+                        fullname: Olivier Boël
+                        politician_id: politician_be_1523
+                      - key: claire.grandjean
+                        fullname: Claire Grandjean
+                        politician_id: politician_be_1430
+                      - key: culot.gerard
+                        fullname: Gérard Culot
+                        politician_id: politician_be_1801
+                    i18n:
+                      en:
+                        party_be_ecolo_name: Ecolo
+                        election_type_be_municipal: Élections communales
+                      nl:
+                        party_be_ecolo_name: Ecolo
+                        election_type_be_municipal: Gemeentelijke verkiezingen
+                      fr:
+                        election_type_be_municipal: Élections communales
+                        party_be_ecolo_name: Ecolo
+                        party_be_6850_independant: INDEPENDANT
+
   /vote/party/search:
     get:
+      deprecated: true
       operationId: vote_party_search_get
       summary: search parties
       tags: [party]
@@ -193,16 +199,21 @@ paths:
                 default:
                   value:
                     data:
-                      - key: be_bub
-                        name: party_be_bub_name
-                      - key: be_cdv
-                        name: party_be_cdv_name
+                      - key: be_6850_ecolo
+                        name: be_ecolo_name
+                      - key: be_6850_independant
+                        name: be_6850_independant_name
                     i18n:
                       en:
-                        party_be_bub_name: B.U.B
-                        party_be_cdv_name: CD&V                      
+                        party_be_ecolo_name: Ecolo
+                      nl:
+                        party_be_ecolo_name: Ecolo
+                      fr:
+                        party_be_ecolo_name: Ecolo
+                        party_be_6850_independant: INDEPENDANT                   
   /vote/candidate/search:
     get:
+      deprecated: true
       operationId: vote_candidate_search_get
       summary: search candidates
       tags: [candidate]
@@ -219,15 +230,18 @@ paths:
                 default:
                   value:
                     data:
-                      - key: servais_verherstraeten
-                        name: Servais Verherstraeten
-                        politician_id: politician_be_232
-                      - key: nahima_lanjri
-                        name: Nahima Lanjri
-                        politician_id: politician_be_142
-                      - key: walter_schroons
-                        name: Walter Schroons
-                        politician_id: politician_be_142
+                      - key: patricia.jadot
+                        fullname: Patricia Jadot
+                        politician_id: politician_be_1048
+                      - key: olivier.boel
+                        fullname: Olivier Boël
+                        politician_id: politician_be_1523
+                      - key: claire.grandjean
+                        fullname: Claire Grandjean
+                        politician_id: politician_be_1430
+                      - key: culot.gerard
+                        fullname: Gérard Culot
+                        politician_id: politician_be_1801
   /vote/district/search:
     get:
       operationId: vote_district_search_get
@@ -712,6 +726,9 @@ components:
         type:
           type: string
           enum: [be_regional, be_municipal, be_provincial]
+        type_name:
+          type: string
+          format: i18nref
         date: # or date ?? 2018-06 -> is ISO valid
           type: string
           format: date
@@ -839,11 +856,11 @@ components:
         code:
           type: string #TODO is integer suitable
         type:
-          type: string
-          enum: [region,province,municipality]        
+          type: string 
         name:
           type: string #TODO could have i18n ref format
         district_in_keys:
+          deprecated: true
           type: array
           items:
             type: string

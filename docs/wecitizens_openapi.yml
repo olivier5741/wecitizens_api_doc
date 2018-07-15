@@ -3,6 +3,7 @@
 # add path to get all elections + path for active elections
 # 201 not supported by loopback 4 generation
 # why not give information about the mandate of the election (how long, ...)
+# TODO differentiate uuid and id (name of parameter reuse)
 
 openapi: 3.0.0
 servers:
@@ -14,7 +15,7 @@ servers:
     description: local
 info:
   title: WeCitizens API
-  version: '0.4.0'
+  version: '0.5.0'
   description: |
     WeCitizens API consists of two endpoints to sustain an electoral GPS app. 
 
@@ -32,7 +33,11 @@ info:
     Polls can be grouped into **campaigns**. 
     When the survey is completed, you can go for an answer **submission** and ask for a **match** (who corresponds to my answers).
 
-    # Internationalization
+    ## Dir (politician directory)
+
+    Info about politicians (not yet complete)
+
+    ## Internationalization
 
     > Language filtering will be available through HTTP header `Accept-Language` but not currently implemented.
     > You'll be served all languages (currently max 3 or 4)
@@ -42,7 +47,7 @@ info:
 
     `i18n` is build to be fed to https://www.i18next.com/ framework
 
-    ## Election sample
+    ### Election sample
 
     `type_name` value references `i18n.{language}.election_type_be_municipal_name` property
 
@@ -67,7 +72,7 @@ info:
     }
     ```  
 
-    # Swagger-UI
+    ## Swagger-UI
 
     Is available under /swagger-ui. 
 
@@ -81,6 +86,8 @@ x-tagGroups:
     tags: [election, district]
   - name: gps # maybe find something more appropriate
     tags: [poll, survey, answer, match]
+  - name: dir
+    tags: [politician]
 tags:
   - name: election
   - name: district
@@ -88,6 +95,7 @@ tags:
   - name: survey
   - name: answer
   - name: match
+  - name: politician
 paths:
   /vote/election/{key}:
     get:
@@ -120,7 +128,6 @@ paths:
                         election_type_be_municipal: Élections communales
                       nl:
                         election_type_be_municipal: Gemeentelijke verkiezingen
-  # /candidates/{id}:
   /vote/election/{main_election_key}/district/{district_key}: # not sure this is the best way to do it
     get:
       operationId: vote_election_by_district_get
@@ -204,7 +211,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/district_search_response"
               examples:
-                municipality:
+                default:
                   value:
                     data:
                       - key: be_6850
@@ -453,6 +460,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/match_response"
+  /dir/politician/{id}:
+    get:
+      operationId: dir_politician_get
+      summary: Inspect a politician
+      description: |
+        Info returned for politician not yet complete.
+        Mock id `politician_be_1430`
+      tags: [politician]
+      parameters:
+        - $ref: '#/components/parameters/id_path'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/politician"
+              examples:
+                default:
+                  value:
+                    id: politician_be_1523
+                    first_name: Clair
+                    last_name: Grantjean
 components:
   headers:
     Accept-Language:
@@ -475,10 +505,9 @@ components:
       in: path
       name: id
       description: |
-        A UUID identifier
+        A unique identifier (must be unique even across resources)
       schema:
         type: string
-        format: uuid
     key_path:
       name: key  
       description: |
@@ -964,4 +993,13 @@ components:
         score:
           type: double
           example: 75.3
+    politician:
+      type: object
+      properties:
+        id: 
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
 

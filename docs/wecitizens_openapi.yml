@@ -377,10 +377,10 @@ paths:
                   answers: 
                     - value: strongly_no
                       tolerance: important
-                      question_key: should_social_care_be_private
+                      question_key: question_10
                     - value: rather_yes
                       tolerance: not_important
-                      question_key: should_watching_the_red_devils_be_mandatory
+                      question_key: question_21
       responses:
         '200':
           description: created
@@ -449,10 +449,10 @@ paths:
                   answers: 
                     - value: strongly_no
                       tolerance: important
-                      question_key: should_social_care_be_private
+                      question_key: question_10
                     - value: rather_yes
                       tolerance: not_important
-                      question_key: should_watching_the_red_devils_be_mandatory
+                      question_key: question_21
       responses:
         '200':
           description: success

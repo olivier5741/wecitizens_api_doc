@@ -1,0 +1,24 @@
+{
+  "id": "0dc3634b-5561-42d6-9b8c-c5c68b93bfd5",
+  "time": "2018-07-15T00:00:00.000Z",
+  "incomplete": true,
+  "poll_key": "2018_be_district_6850",
+  "survey_key": "2018_be_district_wallonia_rural",
+  "user": {
+    "id": "92534fc0-0773-4f16-a234-e0191e8e7214",
+    "age_level": "under_35",
+    "last_election_vote_names": "Gémard Cunot"
+  },
+  "answers": [
+    {
+      "value": "strongly_no",
+      "tolerance": "important",
+      "question_key": "should_social_care_be_private"
+    },
+    {
+      "value": "rather_yes",
+      "tolerance": "not_important",
+      "question_key": "should_watching_the_red_devils_be_mandatory"
+    }
+  ]
+}

@@ -385,6 +385,7 @@ paths:
     get:
       operationId: gps_submission_get
       summary: Inspect an answer submission
+      description: Mock id `0dc3634b-5561-42d6-9b8c-c5c68b93bfd5`
       tags: [answer]
       parameters:
         - $ref: '#/components/parameters/id_path'
@@ -395,6 +396,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/submission"
+              examples:
+                default:
+                  value:
+                    id: 0dc3634b-5561-42d6-9b8c-c5c68b93bfd5
+                    time: 2018-07-15T00:00:00.000Z
+                    incomplete: true
+                    <<: *submission_example_default 
     put:
       operationId: gps_submission_put
       summary: Update an answer submission

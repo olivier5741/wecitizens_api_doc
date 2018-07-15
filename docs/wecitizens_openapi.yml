@@ -70,13 +70,11 @@ info:
 # Add a logo
 x-tagGroups:
   - name: vote
-    tags: [election, party, candidate, district]
+    tags: [election, district]
   - name: gps # maybe find something more appropriate
     tags: [poll, survey, answer, match]
 tags:
   - name: election
-  - name: party
-  - name: candidate
   - name: district
   - name: poll
   - name: survey
@@ -178,82 +176,16 @@ paths:
                         election_type_be_municipal: Élections communales
                         party_be_ecolo_name: Ecolo
                         party_be_6850_independant: INDEPENDANT
-
-  /vote/party/search:
-    get:
-      deprecated: true
-      operationId: vote_party_search_get
-      summary: search parties
-      tags: [party]
-      parameters:
-        - $ref: '#/components/parameters/election_key_query'
-        - $ref: '#/components/parameters/accept_language'
-      responses:
-        '200':
-          description: success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/party_search_response"
-              examples:
-                default:
-                  value:
-                    data:
-                      - key: be_6850_ecolo
-                        name: be_ecolo_name
-                      - key: be_6850_independant
-                        name: be_6850_independant_name
-                    i18n:
-                      en:
-                        party_be_ecolo_name: Ecolo
-                      nl:
-                        party_be_ecolo_name: Ecolo
-                      fr:
-                        party_be_ecolo_name: Ecolo
-                        party_be_6850_independant: INDEPENDANT                   
-  /vote/candidate/search:
-    get:
-      deprecated: true
-      operationId: vote_candidate_search_get
-      summary: search candidates
-      tags: [candidate]
-      parameters:
-        - $ref: '#/components/parameters/election_key_query'
-      responses:
-        '200':
-          description: success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/candidate_search_response"
-              examples:
-                default:
-                  value:
-                    data:
-                      - key: patricia.jadot
-                        fullname: Patricia Jadot
-                        politician_id: politician_be_1048
-                      - key: olivier.boel
-                        fullname: Olivier Boël
-                        politician_id: politician_be_1523
-                      - key: claire.grandjean
-                        fullname: Claire Grandjean
-                        politician_id: politician_be_1430
-                      - key: culot.gerard
-                        fullname: Gérard Culot
-                        politician_id: politician_be_1801
   /vote/district/search:
     get:
       operationId: vote_district_search_get
       summary: search districts
       tags: [district]
-      parameters: 
-        - $ref: '#/components/parameters/key_query'
-        - $ref: '#/components/parameters/code_query'
-        - $ref: '#/components/parameters/name_contains_query'
-        - $ref: '#/components/parameters/main_district_key_query'
+      parameters:      
         - $ref: '#/components/parameters/election_key_query'
-        - $ref: '#/components/parameters/type_in_query'
+        - $ref: '#/components/parameters/code_contains_query'
+        - $ref: '#/components/parameters/name_contains_query'        
+        - $ref: '#/components/parameters/key_query'   
       responses:
         '200':
           description: success
@@ -575,6 +507,12 @@ components:
       in: query
       example: 6850
       schema:
+        type: string    
+    code_contains_query:     
+      name: code_contains  
+      in: query
+      example: 68
+      schema:
         type: string 
     main_election_key_path:
       name: main_election_key
@@ -645,6 +583,11 @@ components:
       in: query
       description: The key of the question
       example: question_63
+      schema:
+        type: string
+    type_query:
+      name: type     
+      in: query
       schema:
         type: string
     type_in_query:

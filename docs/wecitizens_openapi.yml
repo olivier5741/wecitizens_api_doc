@@ -76,8 +76,10 @@ info:
 
     Is available under /swagger-ui. 
 
-    Currently only github and local mock servers are up to date with specs.    
-    
+    Currently only github and local servers are up to date with specs.    
+    Add `.json` on the last path param to make it work for those two servers 
+    (https://olivier5741.github.io/wecitizens_api_doc/api/vote/election/2018_be_municipal.json)
+
 # Add a logo
 x-tagGroups:
   - name: vote
@@ -100,9 +102,7 @@ paths:
       operationId: vote_election_get
       summary: An election
       tags: [election]
-      description: |
-        For first app release, GET `2018_be_municipal`.
-        (GET `2018_be_municipal` for mock API, only this path)
+      description: For first app release, GET `2018_be_municipal`
       parameters:
         - $ref: '#/components/parameters/key_path'
         - $ref: '#/components/parameters/accept_language'

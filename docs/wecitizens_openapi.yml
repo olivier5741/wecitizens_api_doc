@@ -102,7 +102,7 @@ paths:
       tags: [election]
       description: |
         For first app release, GET `2018_be_municipal`.
-        (GET `2018_be_municipal` for mock API, only this path)
+        (GET `2018_be_municipal.json` for mock API, only this path)
       parameters:
         - $ref: '#/components/parameters/key_path'
         - $ref: '#/components/parameters/accept_language'

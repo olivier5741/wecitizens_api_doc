@@ -17,7 +17,7 @@ info:
   title: WeCitizens API
   version: '0.5.0'
   description: |
-    WeCitizens API consists of two endpoints to sustain an electoral GPS app. 
+    WeCitizens API consists of three endpoints to sustain an electoral GPS app.
 
     ## Vote (election)
 
@@ -53,6 +53,7 @@ info:
 
     ```json
     {
+      "id": "election_23",
       "key": "2018_be_municipal",
       "type": "be_municipal",
       "type_name": "election_type_be_municipal_name"
@@ -105,7 +106,6 @@ paths:
       description: For first app release, GET `2018_be_municipal`
       parameters:
         - $ref: '#/components/parameters/key_path'
-        - $ref: '#/components/parameters/accept_language'
       responses:
         '200':
           description: success
@@ -116,6 +116,7 @@ paths:
               examples:
                 default:
                   value:
+                    id: election_23
                     key: 2018_be_municipal
                     type: be_municipal
                     type_name: election_type_be_municipal_name
@@ -137,7 +138,6 @@ paths:
       parameters:
         - $ref: '#/components/parameters/main_election_key_path'
         - $ref: '#/components/parameters/district_key_path'
-        - $ref: '#/components/parameters/accept_language'
       responses:
         '200':
           description: success
@@ -148,6 +148,7 @@ paths:
               examples:
                 default: # TODO : adapt according to sample above 
                   value:
+                    id: election_240
                     key: 2018_be_municipal_6850
                     type: be_municipal
                     type_name: election_type_be_municipal_name
@@ -214,12 +215,14 @@ paths:
                 default:
                   value:
                     data:
-                      - key: be_6850
+                      - id: district_340
+                        key: be_6850
                         code: 6850
                         type: municipality
                         name: district_be_6850_name
                         district_in_keys: [be_wlx,be_wl] # I don't think it's be_wl
-                      - key: be_1435
+                      - id: district_255
+                        key: be_1435
                         code: 1435
                         type: municipality
                         name: district_be_1435_name     
@@ -236,7 +239,6 @@ paths:
       description: For first app release, set `key` as `{main_election_key}_voter` (sample `2018_be_municipal_voter`). You need to query this to get number of submissions.
       parameters:
         - $ref: '#/components/parameters/key_path'
-        - $ref: '#/components/parameters/accept_language'
       responses:
         '200':
           description: success
@@ -247,6 +249,7 @@ paths:
               examples:
                 default:
                   value:
+                    id: poll_campaign_1
                     key: 2018_be_municipal_voter
                     submission_sum: 65748
   /gps/poll/{key}:
@@ -257,7 +260,6 @@ paths:
       description: For first app release, set the poll `key` as `{main_election_key}_{district_key}_voter` (example `2018_be_municipal_be_6850_voter`)
       parameters:
         - $ref: '#/components/parameters/key_path'
-        - $ref: '#/components/parameters/accept_language'
       responses:
         '200':
           description: success
@@ -268,6 +270,7 @@ paths:
               examples:
                 default:
                   value:
+                    id: poll_293
                     key: 2018_be_municipal_be_6850_voter
                     survey_key: 2018_be_municipal_wallonia_rural
                     segment_keys: [2018_be_municipal_be_6850_politician,2018_be_municipal_be_6850_party]
@@ -279,7 +282,6 @@ paths:
       tags: [survey]
       parameters:
         - $ref: '#/components/parameters/key_path'
-        - $ref: '#/components/parameters/accept_language'
       responses:
         '200':
           description: success
@@ -290,6 +292,7 @@ paths:
               examples:
                 default:
                   value:
+                    id: survey_675
                     key: 2018_be_municipal_wallonia_rural
                     name: survey_2018_be_municipal_wallonia_rural
                     question_order:
@@ -484,22 +487,7 @@ paths:
                     first_name: Clair
                     last_name: Grantjean
 components:
-  headers:
-    Accept-Language:
-      description: The languages for i18n
-      schema:
-        type: string
   parameters:
-    accept_language:
-      name: Accept-Language
-      in: header      
-      deprecated: true
-      description: The language
-      schema:
-        type: array
-        example: [en,fr,nl]
-        items:
-          type: string
     id_path:
       required: true          
       in: path
@@ -624,134 +612,102 @@ components:
         items:
           type: string
   schemas:
-    id:
-      type: string
-      format: uuid
-      description: |
-        A UUID identifier 
-    key:      
-      type: string 
-      description: |
-        A human readable identifier with pattern matching facilities. 
-        Samples : `2018_be_municipal` for an election, `be_wlx` for a district
-      pattern: '[a-z0-9_]+'
-    code:
-      type: string
-      example: 6850
-    main_election_key:
-      type: string
-      example: 2018_be_municipal
-    district_key:
-      description: The key of the district
-      example: be_6850
-      type: string
-    district_type:
-      description: The type of district
-      example: municipality
-      type: string
-      enum: [region, province, municipality]
-    election_key:
-      type: string
-    name:
-      type: string
-    main_district_key:
-      type: string    
-    survey_key:
-      description: The key of the survey
-      example: 2018_be_municipal_brussels
-      type: string
-    segment_key:
-      description: The key of the segment
-      example: 2018_be_municipal_be_6850_politician
-      type: string
-    poll_key:
-      description: The key of the election poll
-      example: 2018_be_municipal_be_6850
-      type: string
-    question_key:
-      description: The key of the question
-      example: question_63
-      type: string   
-    i18n:
-      type: object
-      description: Scoped translations
+    uuidentity:      
       properties:
-        en:
-          type: object
-        nl:
-          type: object
-        fr:
-          type: object
-        de:
-          type: object
-    election:
-      type: object
-      description: an election [main or district] with parties and candidates
-      required:
-        - key
+        id: 
+          type: string
+          readOnly: true
+          format: uuid
+          description: A UUID identifier 
+    label:
       properties:
-        key: 
-          $ref: '#/components/schemas/key'
-        type:
+        key:      
+          type: string 
+          description: |
+            A human readable identifier with pattern matching facilities. 
+            Samples : `2018_be_municipal` for an election, `be_wlx` for a district
+          pattern: '[a-z0-9_]+'
+        name:
           type: string
-          enum: [be_regional, be_municipal, be_provincial]
-        type_name:
-          type: string
-          format: i18nref
-        date: # or date ?? 2018-06 -> is ISO valid
-          type: string
-          format: date
-        main_election_key:
-          $ref: '#/components/schemas/main_election_key'
-        district_type:
-          $ref: '#/components/schemas/district_type'
-        district_key: 
-          $ref: '#/components/schemas/district_key'
-        active: 
-          type: boolean
-        districts:
-          type: array
-          items:
-            $ref: '#/components/schemas/election_district'
-        parties:
-          type: array
-          items:
-            $ref: '#/components/schemas/election_party'
-        candidates:
-          type: array
-          items:
-            $ref: '#/components/schemas/candidate'
+    digital_label:
+      allOf:
+        - $ref: '#/components/schemas/label'
+        - properties:          
+            code:
+              type: string
+              example: 6850    
+    translations:
+      properties:
         i18n:
-          $ref: '#/components/schemas/i18n'
+          type: object
+          description: Scoped translations
+          properties:
+            en:
+              type: object
+            nl:
+              type: object
+            fr:
+              type: object
+            de:
+              type: object
+    election:
+      allOf:
+        - $ref: '#/components/schemas/uuidentity'
+        - $ref: '#/components/schemas/label'
+        - type: object
+          description: an election [main or district] with parties and candidates
+          required:
+            - key
+          properties:
+            type:
+              type: string
+              enum: [be_regional, be_municipal, be_provincial]
+            type_name:
+              type: string
+              format: i18nref
+            date: # or date ?? 2018-06 -> is ISO valid
+              type: string
+              format: date
+            main_election_key:
+              type: string
+            district_type:
+              type: string
+            district_key: 
+              type: string
+            active: 
+              type: boolean
+            districts:
+              type: array
+              items:
+                $ref: '#/components/schemas/election_district'
+            parties:
+              type: array
+              items:
+                $ref: '#/components/schemas/election_party'
+            candidates:
+              type: array
+              items:
+                $ref: '#/components/schemas/candidate'
+        - $ref: '#/components/schemas/translations'
     election_district:
-      type: object
-      description: an election party with members
-      properties:
-        key: 
-          $ref: '#/components/schemas/key'       
-        code:
-          $ref: '#/components/schemas/code'    
-        name:
-          type: string #TODO could have i18n ref format
-        type:
-          type: string
-          enum: [region,province,municipality]
+      allOf:
+        - $ref: '#/components/schemas/digital_label'
+        - type: object
+          description: an election party with members
+          properties:
+            type:
+              type: string
+              enum: [region,province,municipality]
     election_party:
-      type: object
-      description: an election party with members
-      properties:
-        key:
-          $ref: '#/components/schemas/key' 
-        name:
-          type: string
-        candidates:
-          type: array
-          items:
-            $ref: '#/components/schemas/election_party_candidate'
-        substitutes:
-          type: array
-          items:
-            $ref: '#/components/schemas/election_party_candidate'
+      allOf:
+        - $ref: '#/components/schemas/label'
+        - type: object
+          description: an election party with members
+          properties:
+            candidates:
+              type: array
+              items:
+                $ref: '#/components/schemas/election_party_candidate'
     election_party_candidate:
       type: object
       description: An election party member
@@ -759,23 +715,20 @@ components:
         order:
           type: integer
         key:
-          $ref: '#/components/schemas/key' 
+          type: string
     candidate: # they use election_roll
-      type: object
-      description: An election candidate
-      properties:
-        key:
-          $ref: '#/components/schemas/key' 
-        name:
-          type: string    
-        picture:
-          type: string # maybe URI is possible   
-        politician_id:
-          type: string
-        politician_url:
-          type: string
-    start_limit_search_response_i:
-      type: object
+      allOf:
+        - $ref: '#/components/schemas/label'
+        - type: object
+          description: An election candidate
+          properties:
+            picture:
+              type: string # maybe URI is possible   
+            politician_id:
+              type: string
+            politician_url:
+              type: string
+    search_response:
       properties:
         start:
           type: integer  
@@ -783,13 +736,9 @@ components:
         limit:
           type: integer              
           description: paging max amount of items
-    i18n_i:
-      properties:
-        i18n:
-          $ref: '#/components/schemas/i18n'
     candidate_search_response:
       allOf:
-        - $ref: '#/components/schemas/start_limit_search_response_i'
+        - $ref: '#/components/schemas/search_response'
         - type: object
           properties:
             data:
@@ -798,71 +747,66 @@ components:
                 $ref: '#/components/schemas/candidate'
     party_search_response:
       allOf:
-        - $ref: '#/components/schemas/start_limit_search_response_i'
+        - $ref: '#/components/schemas/search_response'
         - type: object
           properties:
             data:
               type: array
               items:
                 $ref: '#/components/schemas/election_party'
-            i18n:
-              $ref: '#/components/schemas/i18n'
+        - $ref: '#/components/schemas/translations'
     district_search_response:
       allOf:
-        - $ref: '#/components/schemas/start_limit_search_response_i'
+        - $ref: '#/components/schemas/search_response'
         - type: object
           properties:
             data:
               type: array
               items:
-                $ref: '#/components/schemas/district_search_response_item'        
-        - $ref: '#/components/schemas/i18n_i'
-    district_search_response_item: # TODO should find shorter name
-      type: object
-      properties:
-        key:
-          type: string        
-        code:
-          type: string #TODO is integer suitable
-        type:
-          type: string 
-        name:
-          type: string #TODO could have i18n ref format
-        district_in_keys:
-          deprecated: true
-          type: array
-          items:
-            type: string
+                $ref: '#/components/schemas/district'        
+        - $ref: '#/components/schemas/translations'
+    district: # TODO should find shorter name
+      allOf:
+        - $ref: '#/components/schemas/uuidentity'
+        - $ref: '#/components/schemas/digital_label'
+        - type: object
+          properties:
+            type:
+              type: string 
+            district_in_keys:
+              deprecated: true
+              type: array
+              items:
+                type: string
     poll_campaign:
-      type: object
-      description: a poll campaign
-      properties:
-        key: 
-          $ref: '#/components/schemas/key'
+      allOf:        
+        - $ref: '#/components/schemas/uuidentity'  
+        - $ref: '#/components/schemas/label'
+        - type: object
+          description: a poll campaign
     poll:
-      type: object
-      description: a poll
-      properties:
-        key: 
-          $ref: '#/components/schemas/key'
-        survey_key: 
-          $ref: '#/components/schemas/survey_key'
-        segment_keys:
-          type: array
-          items:
-            $ref: '#/components/schemas/segment_key'
-        insufficient_data:
-          type: boolean
-          description: whether there is enough registered candidates for the voter to do the survey
+      allOf:    
+        - $ref: '#/components/schemas/uuidentity'    
+        - $ref: '#/components/schemas/label'
+        - type: object
+          description: a poll
+          properties:
+            survey_key: 
+              type: string
+            segment_keys:
+              type: array
+              items:
+                type: string
+            insufficient_data:
+              type: boolean
+              description: whether there is enough registered candidates for the voter to do the survey
     survey:
       allOf:
+        - $ref: '#/components/schemas/uuidentity'  
+        - $ref: '#/components/schemas/label'  
         - type: object
           description: a survey with questions
           properties:
-            key: 
-              $ref: '#/components/schemas/key'
-            name:
-              type: string
             questions_order:
               type: array
               items:
@@ -875,33 +819,32 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/answer_format'
-        - $ref: '#/components/schemas/i18n_i'
+        - $ref: '#/components/schemas/translations'
     question:
-      type: object
-      description: a question
-      properties:
-        key:
-          type: string
-        text:
-          type: string
-        notice:
-          type: string
-        answer_format:
-          type: string
-          enum: [agr_5_scale_tol_3_scale_abs]
+      allOf:
+        - $ref: '#/components/schemas/uuidentity'  
+        - $ref: '#/components/schemas/label'  
+        - type: object
+          description: a question
+          properties:
+            notice:
+              type: string
+            answer_format:
+              type: string
+              enum: [agr_5_scale_tol_3_scale_abs]
         # there is a name and an explanation/notice [excerpt ??]
     answer_format:
-      type: object
-      description: an answer format
-      properties:
-        key: 
-          $ref: '#/components/schemas/key'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/answer_format_item'
-        tolerance:
-          $ref: '#/components/schemas/answer_format_tolerance'
+      allOf:
+        - $ref: '#/components/schemas/label'  
+        - type: object
+          description: an answer format
+          properties:
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/answer_format_item'
+            tolerance:
+              $ref: '#/components/schemas/answer_format_tolerance'
     answer_format_tolerance:
       type: object
       properties:
@@ -915,47 +858,47 @@ components:
       type: object    
       properties:
         key: 
-          $ref: '#/components/schemas/key' # trouble with this in swagger_uis
+          type: string # trouble with this in swagger_uis
         name:
           type: string
         weight:
           type: number
     submission:
-      type: object
-      description: Answers submission
-      properties:
-        id:
-          $ref: '#/components/schemas/id'
-        time:
-          readOnly: true
-          type: string
-          format: datetime
-        poll_key:
-          $ref: '#/components/schemas/poll_key'
-        survey_key:
-          $ref: '#/components/schemas/survey_key'
-        segment_key:
-          $ref: '#/components/schemas/segment_key'
-        user:
-          $ref: '#/components/schemas/submission_user'
-        incomplete:
-          type: boolean          
-          readOnly: true
-          description: When this is a candidate or a party submission we need to know if all questions where answered
-        answers:
-          type: array
-          items:
-            $ref: '#/components/schemas/answer'
+      allOf:
+        - $ref: '#/components/schemas/uuidentity'
+        - type: object
+          description: Answers submission
+          properties:
+            time:
+              readOnly: true
+              type: string
+              format: datetime
+            poll_key:
+              type: string
+            survey_key:
+              type: string
+            segment_key:
+              type: string
+            user:
+              $ref: '#/components/schemas/submission_user'
+            incomplete:
+              type: boolean          
+              readOnly: true
+              description: When this is a candidate or a party submission we need to know if all questions where answered
+            answers:
+              type: array
+              items:
+                $ref: '#/components/schemas/answer'
     submission_user:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/id'
-        age_level:
-          type: string
-          example: under_35
-        last_election_vote_names:
-          type: string          
+      allOf:
+        - $ref: '#/components/schemas/uuidentity'
+        - type: object
+          properties:
+            age_level:
+              type: string
+              example: under_35
+            last_election_vote_names:
+              type: string          
     answer:
       type: object
       description: an answer
@@ -965,13 +908,13 @@ components:
         tolerance:
           type: string
         question_key:
-          $ref: '#/components/schemas/question_key'
+          type: string
     match:
       type: object
       description: Answers match submission
       properties:
         segment_key:
-          $ref: '#/components/schemas/segment_key'
+          type: string
         answers:
           type: array
           items:
@@ -994,12 +937,13 @@ components:
           type: number
           example: 75.3
     politician:
-      type: object
-      properties:
-        id: 
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
+      allOf:
+        - $ref: '#/components/schemas/uuidentity'
+        - $ref: '#/components/schemas/label'
+        - type: object
+          properties:
+            first_name:
+              type: string
+            last_name:
+              type: string
 

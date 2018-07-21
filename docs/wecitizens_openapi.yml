@@ -15,7 +15,7 @@ servers:
     description: local
 info:
   title: WeCitizens API
-  version: '0.5.0'
+  version: '0.6.0'
   description: |
     WeCitizens API consists of three endpoints to sustain an electoral GPS app.
 

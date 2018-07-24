@@ -1,0 +1,112 @@
+{
+  "success": true,
+  "data": {
+    "questions": [
+      {
+        "id": 0,
+        "text": "question.0_text",
+        "notice": ""
+      },
+      {
+        "id": 1,
+        "text": "question.1_text",
+        "notice": ""
+      },
+      {
+        "id": 2,
+        "text": "question.2_text",
+        "notice": ""
+      },
+      {
+        "id": 3,
+        "text": "question.3_text",
+        "notice": ""
+      },
+      {
+        "id": 4,
+        "text": "question.4_text",
+        "notice": ""
+      }
+    ],
+    "i18n": {
+      "en": {
+        "question": {
+          "0_text": "The legal retirement age should be increased from 65 to 67 years.",
+          "1_text": "Turkey may join the European Union.",
+          "2_text": "Taxes must be severely diminished, even if it means a reduction in public services.",
+          "3_text": "Islam can be assimilated in Belgium today.",
+          "4_text": "We must repeal the right of homosexual couples to adopt children."
+        },
+        "answer_format": {
+          "item": {
+            "strongly_agree": "Fully agree",
+            "agree": "Rather yes",
+            "no_opinion": "No opinion",
+            "disagree": "Rather no",
+            "strongly_disagree": "Strongly disagree"
+          },
+          "tolerance": {
+            "absolute": "Absolute",
+            "item": {
+              "very_important": "Very important",
+              "important": "Important",
+              "not_important": "Not important"
+            }
+          }
+        }
+      },
+      "fr": {
+        "question": {
+          "0_text": "L'âge légal de la pension devrait passer de 65 à 67 ans.",
+          "1_text": "La Turquie peut rejoindre l'Union européenne.",
+          "2_text": "Les taxes doivent être sévèrement diminuées, même si cela implique une réduction des services publics.",
+          "3_text": "L'islam peut être assimilé en Belgique aujourd'hui.",
+          "4_text": "Nous devons abroger le droit des couples homosexuels d'adopter des enfants."
+        },
+        "answer_format": {
+          "item": {
+            "strongly_agree": "Tout à fait d'accord",
+            "agree": "Plutôt d'accord",
+            "no_opinion": "Je ne me prononce pas",
+            "disagree": "Plutôt pas d'accord",
+            "strongly_disagree": "Pas du tout d'accord"
+          },
+          "tolerance": {
+            "absolute": "Non négociable",
+            "item": {
+              "very_important": "Très important",
+              "important": "Important",
+              "not_important": "Pas important"
+            }
+          }
+        }
+      },
+      "nl": {
+        "question": {
+          "0_text": "De wettelijke pensioenleeftijd moet worden verhoogd van 65 naar 67 jaar.",
+          "1_text": "Turkije kan lid worden van de Europese Unie.",
+          "2_text": "Belastingen moeten sterk worden verminderd, zelfs als dit een vermindering van openbare diensten betekent.",
+          "3_text": "Islam kan vandaag in België geassimileerd worden.",
+          "4_text": "We moeten het recht van homoseksuele paren om kinderen te adopteren, intrekken."
+        },
+        "answer_format": {
+          "item": {
+            "strongly_agree": "Helemaal akkoord",
+            "agree": "Eerder ja",
+            "no_opinion": "Ik spreek mij niet uit",
+            "disagree": "Eerder nee",
+            "strongly_disagree": "Helemaal niet akkoord"
+          },
+          "tolerance": {
+            "absolute": "Absoluut",
+            "item": {
+              "very_important": "Zeer belangrijk",
+              "important": "Belangrijk",
+              "not_important": "Niet belangrijk"
+            }
+          }
+        }
+      }
+    }
+  }
+}

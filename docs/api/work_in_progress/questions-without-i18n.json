@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": 0,
+      "text": "The legal retirement age should be increased from 65 to 67 years.",
+      "notice": ""
+    },
+    {
+      "id": 1,
+      "text": "Turkey may join the European Union.",
+      "notice": ""
+    },
+    {
+      "id": 2,
+      "text": "Taxes must be severely diminished, even if it means a reduction in public services.",
+      "notice": ""
+    },
+    {
+      "id": 3,
+      "text": "Islam can be assimilated in Belgium today.",
+      "notice": ""
+    },
+    {
+      "id": 4,
+      "text": "We must repeal the right of homosexual couples to adopt children.",
+      "notice": ""
+    }
+  ]
+}

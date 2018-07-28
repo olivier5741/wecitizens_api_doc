@@ -2,11 +2,11 @@
   "key": "2018_be_municipal_wallonia_rural",
   "name": "survey_2018_be_municipal_wallonia_rural",
   "question_order": [
-  	"question_1",
-  	"question_2",
-  	"question_3",
-  	"question_4",
-    "question_5"
+    "question_1",
+    "question_5",
+    "question_3",
+    "question_4",
+    "question_2"
   ],
   "questions": [
     {
@@ -32,7 +32,6 @@
       "notice": "question.4_notice",
       "answer_format": "agr_5_scale_tol_3_scale_abs"
     },
-
     {
       "key": "question_5",
       "text": "question.5_text",
@@ -41,7 +40,7 @@
     }
   ],
   "answer_formats": [
-  	{
+    {
       "key": "dummy_yes_no",
       "items": [
         {

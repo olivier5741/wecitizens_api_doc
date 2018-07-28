@@ -4,9 +4,9 @@ API specs for wecitizens (openapi)
 
 Website on : 
 
-* https://olivier5741.github.io/wecitizens_api_doc/ (ReDoc)
-* https://olivier5741.github.io/wecitizens_api_doc/swagger-ui/ (swagger-ui)
-* https://olivier5741.github.io/wecitizens_api_doc/wecitizens_openapi.yml (specs)
+* https://wecitizens.github.io/wecitizens_api_doc/ (ReDoc)
+* https://wecitizens.github.io/wecitizens_api_doc/swagger-ui/ (swagger-ui)
+* https://wecitizens.github.io/wecitizens_api_doc/wecitizens_openapi.yml (specs)
 
 ## Usage
 
@@ -25,7 +25,7 @@ Belgian provinces and regions : https://en.wikipedia.org/wiki/ISO_3166-2:BE
 ## API
 
 * local route : http://localhost:3000/api
-* public route : https://olivier5741.github.io/wecitizens_api_doc/api
+* public route : https://wecitizens.github.io/wecitizens_api_doc/api
 
 ### Municipal elections
 

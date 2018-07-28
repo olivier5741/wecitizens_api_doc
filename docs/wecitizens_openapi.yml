@@ -7,7 +7,7 @@
 
 openapi: 3.0.0
 servers:
-  - url: https://olivier5741.github.io/wecitizens_api_doc/api
+  - url: https://wecitizens.github.io/wecitizens_api_doc/api
     description: mock
   - url: http://wecitizensapi.co-labs.be:8080/api/v1
     description: dev 

@@ -24,7 +24,7 @@
       "key": "question_3",
       "text": "question.3_text",
       "notice": "question.3_notice",
-      "answer_format": "agr_5_scale_tol_3_scale_abs"
+      "answer_format": "dummy_yes_no"
     },
     {
       "key": "question_4",
@@ -41,6 +41,21 @@
     }
   ],
   "answer_formats": [
+  	{
+      "key": "dummy_yes_no",
+      "items": [
+        {
+          "key": "yes",
+          "name": "answer_format.item.yes",
+          "weight": 100
+        },
+        {
+          "key": "no",
+          "name": "answer_format.item.no",
+          "weight": 0
+        }
+      ]
+    },
     {
       "key": "agr_5_scale_tol_3_scale_abs",
       "items": [
@@ -103,6 +118,8 @@
       },
       "answer_format": {
         "item": {
+          "yes": "Yes",
+          "no": "No",
           "strongly_agree": "Fully agree",
           "agree": "Rather yes",
           "no_opinion": "No opinion",
@@ -129,6 +146,8 @@
       },
       "answer_format": {
         "item": {
+          "yes": "Oui",
+          "no": "Non",
           "strongly_agree": "Tout à fait d'accord",
           "agree": "Plutôt d'accord",
           "no_opinion": "Je ne me prononce pas",
@@ -155,6 +174,8 @@
       },
       "answer_format": {
         "item": {
+          "yes": "Ja",
+          "no": "Nee",
           "strongly_agree": "Helemaal akkoord",
           "agree": "Eerder ja",
           "no_opinion": "Ik spreek mij niet uit",

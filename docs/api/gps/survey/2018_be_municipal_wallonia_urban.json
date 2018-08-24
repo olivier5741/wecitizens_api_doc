@@ -328,6 +328,7 @@
     "en": {
       "question": {
         "4_text": "Taxes must be severely diminished, even if it means a reduction in public services.",
+        "14_text": "Congestion fees for cars users during working days in big cities should be set up.",
         "20_text": "The State may own companies exposed to competition (telephone, newspaper, bank, etc.).",
         "21_text": "To alleviate poverty, basic goods and services (energy, housing, medical care, childcare, etc.) should be available free of charge",
         "22_text": "All public representatives must be required to report all incomes (including benefits in kind) from their public activity.",
@@ -340,12 +341,33 @@
         "88_text": "Both the electoral programs and the proposals to the municipal council should include the budgetary impact, calculated in an independant manner.",
         "89_text": "Good maintenance, including cleanliness, of existing infrastructure has (budget) priority over new municipal initiatives.",
         "93_text": "All services that can be entrusted to private companies, should be subcontracted by the public authority, subject to competition rules.",
-        "98_text": "My town should merge with a neighboring municipality."
+        "95_text": "The municipality must organize a call for projects to stimulate the integration and civic sense of young people by subsidizing the best initiatives."
+      },
+      "answer_format": {
+        "item": {
+          "yes": "Yes",
+          "no": "No",
+          "strongly_agree": "Fully agree",
+          "agree": "Rather yes",
+          "no_opinion": "No opinion",
+          "disagree": "Rather no",
+          "strongly_disagree": "Strongly disagree"
+        },
+        "tolerance": {
+          "absolute": "Absolute",
+          "item": {
+            "very_important": "Very important",
+            "important": "Important",
+            "not_important": "Not important"
+          }
+        }
       }
     },
     "fr": {
       "question": {
         "4_text": "Il faut réduire les impôts, même si cela entraîne une diminution de l'impact des services publics.",
+        "14_text": "Il faut instaurer un péage urbain pour les automobilistes venant en semaine dans lecentre des grandes agglomérations.",
+        "14_notice": "Pour décongestionner le trafic automobile aux heures de pointes du matin et du soir à l’entrée dans Bruxelles, plusieurs études proposent l’instauration d’un péage urbain avec des tarifs journaliers variant de 3 à 12€. L’effet dissuasif du péage ne peut être atteint qu’à la condition de transférer, plus et mieux qu’actuellement, les navetteurs sur les transports en communs.  \nLa congestion, sur les voies d’accès à Bruxelles, est influencée par des choix d’infrastructures et d’urbanisme relevant d’autorités politiques autonomes les unes par rapport aux autres :\n- Le gouvernement flamand, en promouvant l’extension des zones économiques sur les communes périphériques et autour de l’aéroport de Zaventem, fait croître la demande de transit automobile via le ring faute pour les usagers de disposer d’alternatives attrayantes en transport en commun;\n- Le manque d’une desserte cadencée pour les navetteurs venant du sud et de l’ouest de Bruxelles, faute de R.E.R, ne les incite guère à passer du transport individuel vers d’autre mode. \n- On prévoit que Bruxelles continuera de connaitre une croissance d’activité économique, certes ralentie, mais régulière générant son lot de navetteurs supplémentaires. Les réglementations de la Région de Bruxelles-capitale protégeant les quartiers d’habitat face à la demande d’extension des surfaces économiques, particulièrement les bureaux, ne permettent pas d’inverser cette tendance.",
         "20_text": "Les Pouvoirs publics peuvent être propriétaires d'entreprises 'privées' soumises à concurrence, p.ex. médias, banques, opérateurs télécom.",
         "20_notice": "Au sein de l’Union européenne, les Pouvoirs publics peuvent être propriétaires, en partie ou totalement, d’entreprises économiques pour autant que leur gestion ne déroge pas aux règlementations européennes imposant le respect  des règles de concurrence non faussée qui interdisent les subventions déguisées sauf pour les entreprises chargées de mission de services publics comme la Poste et la SNCB. Dans des secteurs comme ceux de l’édition, de la communication et de la culture, la Commission européenne admet des aides publiques pour soutenir la création et maintenir la diversité des opinions.",
         "21_text": "Pour remédier à la pauvreté, il faut offrir, gratuitement ou avec une forte réduction de prix, certains biens et services fondamentaux.",
@@ -361,28 +383,28 @@
         "49_text": "L’aide sociale aux immigrés doit être modulée en fonction de leur réussite d'un parcours d'intégration.",
         "58_text": "Les limitations de vitesse à 30 km/h doivent être strictement limitées à des points sensibles.",
         "58_notice": "La limitation de vitesse à 30km/h se justifie particulièrement lorsque la circulation automobile traverse des zones urbaines fréquentées régulièrement par des piétons et des cyclistes et où la fonction de séjour est prépondérante  comme les abords d’écoles, de centres sportifs, les marchés  ou dans les quartiers d’habitations  lorsque la voirie sert également d’aire de jeux pour les enfants.\nLes zones « trente » ne doivent plus obligatoirement être annoncées par des rétrécissements de l’espace public. Les autorités publiques en Belgique comme dans les pays scandinaves encouragent l’extension des « zones trente » à l’ensemble des quartiers où prédomine l’habitat et les activités à forte fréquentation de piétons et de cyclistes.",
+        "84_text": "La commune doit veiller à ce que les électeurs disposent d'un système d'aide au vote (comme le GPS électoral).",
+        "84_notice": "Les systèmes d'aide au vote (SAV), permettant de sélectionner les candidats sur base d'un questionnaire politique, sont de plus en plus populaires. Pour être crédibles, ils doivent être produits par des instances impartiales. Les Pays-Bas sont des précurseurs: pour les élections communales de mars 2018, 44 villes y ont payé l'institut Prodemos pour produire un SAV local.  La réduction progressive des coûts fait que le système d'aide au vote représenterait un coût, pour la commune, comparable aux panneaux d’affichage électoraux. Or la valeur ajoutée d'un bon SAV est largement supérieure. Faute de soutien financier, le GPS électoral de 2018 doit se limiter à des questions générales valables pour l'ensemble des communes. Il ne peut pas prendre en compte les spécificités de la ville/commune.",
         "86_text": "Le CPAS doit accueillir plus de gens (y compris des jeunes condamnés à des travaux d'intérêt général) pour y faire une expérience sociale.",
         "88_text": "Les programmes électoraux doivent inclure l'impact budgétaire des propositions.",
         "89_text": "Le bon entretien, y compris la propreté, des infrastructures existantes a budgétairement priorité sur les nouvelles initiatives communales.",
         "93_text": "Il faut sous-traiter tous les services qu'il est possible de confier à des tiers, moyennant mise en concurrence.",
-        "98_text": "Ma commune devrait fusionner avec une commune voisine (sur une base volontaire).",
+        "95_text": "La commune doit organiser des appels à projets visant à stimuler l'intégration et le sens civique des jeunes. Les meilleures initiatives doivent être subsidiées.",
+        "96_text": "Il faut augmenter le nombre de rues piétonnes.",
         "103_text": "Il convient de réduire l'impôt sur le travail, quitte à augmenter l'impôt ailleurs.",
         "103_notice": "Certains considèrent qu'en vertu de la loi du marché, toute augmentation de l'impôt sur le travail pénalise l'emploi. Plus la main-d'œuvre est chère, plus le marché cherche des solutions alternatives (délocalisation, robotisation, etc). La commune décide les centimes additionnels sur l'impôt des personnes physiques (qui vise la rémunération professionnelle, mais pas uniquement ces revenus) et sur le précompte immobilier. Le tax-shift peut se faire en augmentant les taxes environnementales, la fiscalité sur le patrimoine et les plus-values, les amendes, les produits de luxe, etc.",
         "105_text": "Toute pétition souscrite par 0,5% de la population, doit être automatiquement présentée au Conseil communal.",
-        "110_text": "Des espaces pour des potagers et des poulaillers communautaires doivent être aménagés par les communes.",
-        "111_text": "Indépendamment du coût, la maison communale doit ouvrir les guichets, au moins une fois par semaine, en-dehors des heures de bureau.",
         "112_text": "Les mandataires et fonctionnaires doivent être soumis à un code déontologique, permettant de dénoncer les abus dans l'exercice du pouvoir.",
         "118_text": "Il faut installer davantage de caméras de surveillance dans les rues.",
+        "123_text": "Il faut plus d'arbres, même si cela empiète sur les trottoirs ou les emplacements de parking.",
         "130_text": "La discipline de parti, exigeant de voter selon des orientations reçues du parti, passe avant les principes éthiques personnels.",
         "133_text": "Les écoles devraient partager leur infrastructurs sportive avec les autres écoles, et avec les clubs sportifs.",
-        "136_text": "Les activités et valeurs religieuses et philosophiques devraient être davantage respectées par la politique.",
-        "136_notice": "Certains considèrent que l’État peut et devrait encourager la pratique religieuse. Ils considèrent que la religion encourage les adeptes à se comporter de façon honnête et citoyennement responsable. \nD’autres, en revanche, interprètent la saine règle de séparation des pouvoirs entre l’Église et l’État comme un refoulement de la religion vers la sphère privée. Ils refusent aux autorités religieuses le droit de s’exprimer sur des matières débattues au parlement. \nLe radicalisme de certains extrémistes se réclamant d’Allah alimente la tendance à présenter la religion comme une nuisance pour le bien commun, plutôt que le contraire.",
         "149_text": "Les accords pré-électoraux, entre partis en lice, doivent être rendus publics bien avant les élections.",
         "196_text": "Même si cela coûte plus cher, la commune doit s'approvisionner principalement en énergie durable.",
         "200_text": "Le mandataire devrait s'aligner sur les tendances majoritaires qui se dégagent dans les sondages de l'opinion publique.",
         "200_notice": "L’idée d’avoir des mandataires qui s’alignent sur les tendances populaires est séduisante. Elle soulève toutefois quelques questions. Quelle est la valeur des sondages : qualité scientifique de l’exécution, niveau de préparation/conditionnement des participants au sondage, etc ? Si on veut consulter la population en vue d’une décision politique, ne faut-il pas se baser sur un référendum ? Le mandataire doit-il rendre des comptes à la majorité de la population, ou à ceux qui l’ont élu sur base d’un programme précis ? Souhaite-t-on un mandataire sans convictions personnelles ?",
+        "207_text": "La ville doit mettre tout en œuvre pour accueillir un système de voitures partagées (comparable à Cambio, Bolides, Zen Car, etc).",
         "218_text": "Dans l'aménagement des espaces publics, l'objectif esthétique doit rester subordonné aux aspects utilitaires, économiques et sécuritaires.",
-        "229_text": "La commune doit tendre à ce que les démarches administratives puissent se régler notamment par voie électronique.",
         "230_text": "L'autorité qui ne respecte pas les délais pour accorder des autorisations administratives (comme un permis d'urbanisme), doit indemniser le demandeur, par jour de retard.",
         "232_text": "Les autorités doivent mener une politique active pour assurer aux personnes LGBTQI+ une meilleure reconnaissance sociale.",
         "232_notice": "L'association RainbowHouse, de défense des personnes LGBTQI+, préconise e.a.: la création d'un service en charge de l'égalité des chances, un système de plainte à disposition des fonctionnaires victimes de menaces ou de discrimination , une plus grande présence des personnes LGBTQI+ dans la programmation culturelle et dans les supports pédagogiques, des actions de formation/sensibilisation des agents publics, etc. Cette association invite les autorités publiques à Afficher les symboles des communautés minorisées lors de leurs principaux événements (p.ex. Belgian Pride), en utilisant, selon les cas, less bâtiments publics (drapeaux) et/ou less supports de communication (journal communal, panneaux d'affichage).",
@@ -392,30 +414,32 @@
         "262_text": "Lorsque le cadre légal le permettra, la commune et le CPAS doivent fusionner.",
         "262_notice": "La fusion entre la commune et le CPAS est déjà un fait, imposé par la Région, en Flandre. La Région wallonne envisage de créer un cadre légal permettant une fusion sur base volontaire. Sans négliger les synergies envisageables entre les CPAS de différentes communes, les synergies à mettre en place entre la commune et le CPAS peuvent s’imaginer à différents niveaux et permettent sans doute d’importantes économies d’échelle et un renforcement de l’efficacité et de la cohérence des services pour les deux institutions, notamment en limitant les doublons en matière de personnel et de services proposés. Ainsi, les services informatiques, juridiques (marchés publics, suivi des dossiers), financiers, d’entretien des locaux, du personnel, par exemple, pourraient fonctionner au bénéfice direct des deux institutions.",
         "264_text": "Par un système approprié de bourses, la commune doit favoriser l'apprentissage d'un métier, en situation réelle de travail, pour des stagiaires en difficultés d'insertion."
-      }
-    },
-    "answer_format": {
-      "item": {
-        "yes": "Oui",
-        "no": "Non",
-        "strongly_agree": "Tout à fait d'accord",
-        "agree": "Plutôt d'accord",
-        "no_opinion": "Je ne me prononce pas",
-        "disagree": "Plutôt pas d'accord",
-        "strongly_disagree": "Pas du tout d'accord"
       },
-      "tolerance": {
-        "absolute": "Non négociable",
+      "answer_format": {
         "item": {
-          "very_important": "Très important",
-          "important": "Important",
-          "not_important": "Pas important"
+          "yes": "Oui",
+          "no": "Non",
+          "strongly_agree": "Tout à fait d'accord",
+          "agree": "Plutôt d'accord",
+          "no_opinion": "Je ne me prononce pas",
+          "disagree": "Plutôt pas d'accord",
+          "strongly_disagree": "Pas du tout d'accord"
+        },
+        "tolerance": {
+          "absolute": "Non négociable",
+          "item": {
+            "very_important": "Très important",
+            "important": "Important",
+            "not_important": "Pas important"
+          }
         }
       }
     },
     "nl": {
       "question": {
         "4_text": "De belastingdruk moet worden verlaagd, zelfs indien dit ten koste gaat van de openbare dienstverlening.",
+        "14_text": "Er moet een stedelijke wegenbelasting worden ingevoerd voor automobilisten die tijdens de weekdagen het centrum van de grote agglomeraties binnenrijden.",
+        "14_notice": "Om het autoverkeer tijdens de ochtend  en avondspits bij het binnenkomen van Brussel vlotter te laten verlopen, stellen verscheidene studies voor een stadstol in te voeren met dagtarieven die schommelen tussen 3 tot 12 EUR. Dergelijke tolheffing kan slechts ontradend zijn, wanneer ze de pendelaars meer en beter dan nu het openbaar vervoer doet gebruiken.  \nDe files op de Brusselse invalswegen worden beïnvloed door de keuzes inzake infrastructuur en stedenbouw, die behoren tot de bevoegdheid van politieke instanties die losstaan van elkaar:\n- Wanneer de Vlaamse regering de uitbreiding van de bedrijfszones in de randgemeenten en rond de luchthaven van Zaventem promoot, veroorzaakt ze een toename van het autoverkeer op de ring, aangezien het openbaar vervoer de weggebruikers geen aantrekkelijk alternatief biedt;\n- Bij gebrek aan een GEN, hebben de pendelaars vanuit het zuiden en het westen van Brussel onvoldoende klokvaste diensten, zodat ze minder geneigd zijn van het individueel vervoer over te stappen naar een andere transportwijze. \n- Men verwacht dat de economische activiteit in Brussel, trager maar regelmatig, zal blijven groeien en dus meer pendelaars zal aantrekken. De regelgeving van het Brussel Hoofdstedelijk Gewest die de woonwijken beschermt tegen de uitbreiding van bedrijfsvolumes, meer bepaald van kantoren, kan die trend niet ombuigen.",
         "20_text": "De overheid mag eigenaar zijn van 'private' ondernemigen die onderhevig zijn aan concurrentie (telecom, media, banken, enz.).",
         "20_notice": "Binnen de Europese Unie kunnen overheden geheel of gedeeltelijk eigenaar zijn van handelsondernemingen, op voorwaarde dat het beheer ervan niet in strijd is met de Europese regelgeving inzake eerlijke concurrentie, die verborgen overheidssteun verbiedt, behalve voor ondernemingen die moeten zorgen voor openbare dienstverlening, zoals de Post en de NMBS. In sectoren zoals uitgeverij, communicatie en cultuur, staat de Europese Commissie overheidssteun toe om de creativiteit te bevorderen en de verscheidenheid van meningen in stand te houden.",
         "21_text": "Om de armoede te bestrijden, moeten bepaalde basisgoederen en -diensten (energie, huisvesting, gezondheidszorg, kinderopvang, enz.) gratis aangeboden worden.",
@@ -434,37 +458,33 @@
         "88_text": "Zowel de verkiezingsprogramma’s als de voorstellen aan de gemeente- of provincieraad moeten rekening houden met de budgettaire gevolgen, op een onafhankelijke manier berekend.",
         "89_text": "Goed onderhoud, met inbegrip van netheid, van de bestaande infrastructuur heeft (budgettair) prioriteit boven nieuwe gemeentelijke initiatieven.",
         "93_text": "De overheid moet alle diensten uitbesteden die aan particuliere ondernemingen kunnen worden uitbesteed, middels een procedure in vrije concurrentie.",
-        "98_text": "Mijn gemeente zou met een buurgemeente moeten fuseren.",
+        "95_text": "De gemeente moet een projectoproep organiseren om de integratie van en de zin voor burgerschap bij jongeren te stimuleren, door de beste initiatieven te subsidiêren.",
+        "96_text": "Er moeten meer autovrije komen.",
         "103_text": "Om de werkgelegenheid niet te benadelen, is het wenselijk de belasting op arbeid te verlagen (opcentiemen voor natuurlijke personen), ook al betekent dat dat de belastingen elders moeten worden verhoogd (onroerende voorheffing, milieubelastingen enz.).",
-        "110_text": "Er moeten gemeenschappelijke groentetuinen en kippenhokken worden aangelegd.",
-        "111_text": "Ongeacht de kost, moet het gemeentehuis de loketten minstens één keer per week buiten de kantooruren openen.",
         "112_text": "Mandatarissen en ambtenaren van onze entiteit moeten onderworpen zijn aan een deontologische code, waarbij misbruiken ivm machtsuitoefening, verkiezingscampagnes, transparantie en belangenconflicten wordt gesanctioneerd.",
         "118_text": "We hebben meer bewakingscamera's op straat nodig.",
+        "123_text": "Er is nood aan meer bomen, zelfs als die op voetpaden of parkeerplaatsen moeten komen.",
         "133_text": "Scholen zouden hun sportfaciliteiten met andere scholen en met sportclubs moeten delen.\n",
-        "136_text": "Religieuze beginselen en waarden zouden door de politiek meer gerespecteerd moeten worden.\n",
-        "136_notice": "Sommigen zijn van mening dat de staat religieuze praktijken kan en moet aanmoedigen. Ze geloven dat religie volgelingen aanmoedigt om zich op een eerlijke en sociaal verantwoorde manier te gedragen.\nAnderen interpreteren de klankregel van scheiding der machten tussen kerk en staat als een terugdringing van religie naar de privésfeer. Ze weigeren religieuze autoriteiten het recht om zich uit te drukken over zaken die in het parlement worden besproken.\nHet radicalisme van sommige extremisten die Allah inroepen, voedt de neiging om religie af te schilderen als een gevaar voor het algemeen welzijn, in plaats van het tegenovergestelde.",
-        "149_text": "Voorafgaande verkiezingsakkoorden tussen deelnemende partijen moeten ten minste drie weken voor de verkiezingen openbaar worden gemaakt.\n"
-      }
-    }
-  },
-  "nl": {
-    "question": null,
-    "answer_format": {
-      "item": {
-        "yes": "Ja",
-        "no": "Nee",
-        "strongly_agree": "Helemaal akkoord",
-        "agree": "Eerder ja",
-        "no_opinion": "Ik spreek mij niet uit",
-        "disagree": "Eerder nee",
-        "strongly_disagree": "Helemaal niet akkoord"
+        "149_text": "Voorafgaande verkiezingsakkoorden tussen deelnemende partijen moeten ten minste drie weken voor de verkiezingen openbaar worden gemaakt.\n",
+        "207_text": "De stad moet er alles aan doen om een systeem van gedeelde autos in te voeren (vergelijkbaar met Cambio, Bolides, Zen Car, enz)."
       },
-      "tolerance": {
-        "absolute": "Absoluut",
+      "answer_format": {
         "item": {
-          "very_important": "Zeer belangrijk",
-          "important": "Belangrijk",
-          "not_important": "Niet belangrijk"
+          "yes": "Ja",
+          "no": "Nee",
+          "strongly_agree": "Helemaal akkoord",
+          "agree": "Eerder ja",
+          "no_opinion": "Ik spreek mij niet uit",
+          "disagree": "Eerder nee",
+          "strongly_disagree": "Helemaal niet akkoord"
+        },
+        "tolerance": {
+          "absolute": "Absoluut",
+          "item": {
+            "very_important": "Zeer belangrijk",
+            "important": "Belangrijk",
+            "not_important": "Niet belangrijk"
+          }
         }
       }
     }

@@ -2,40 +2,251 @@
   "key": "2018_be_municipal_wallonia_rural",
   "name": "survey_2018_be_municipal_wallonia_rural",
   "question_order": [
-    "question_1",
-    "question_5",
-    "question_3",
-    "question_4",
-    "question_2"
+    "question_110",
+    "question_264",
+    "question_49",
+    "question_22",
+    "question_23",
+    "question_31",
+    "question_38",
+    "question_46",
+    "question_130",
+    "question_21",
+    "question_262",
+    "question_257",
+    "question_255",
+    "question_232",
+    "question_230",
+    "question_196",
+    "question_103",
+    "question_20",
+    "question_111",
+    "question_112",
+    "question_118",
+    "question_229",
+    "question_133",
+    "question_136",
+    "question_149",
+    "question_105",
+    "question_200",
+    "question_218",
+    "question_98",
+    "question_93",
+    "question_89",
+    "question_88",
+    "question_86",
+    "question_58",
+    "question_4"
   ],
   "questions": [
     {
-      "key": "question_1",
-      "text": "question.1_text",
+      "key": "question_110",
+      "text": "question.110_text",
+      "notice": "question.110_notice",
       "answer_format": "agr_5_scale_tol_3_scale_abs"
     },
     {
-      "key": "question_2",
-      "text": "question.2_text",
-      "notice": "question.2_notice",
+      "key": "question_264",
+      "text": "question.264_text",
+      "notice": "question.264_notice",
       "answer_format": "agr_5_scale_tol_3_scale_abs"
     },
     {
-      "key": "question_3",
-      "text": "question.3_text",
-      "notice": "question.3_notice",
-      "answer_format": "dummy_yes_no"
+      "key": "question_49",
+      "text": "question.49_text",
+      "notice": "question.49_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_22",
+      "text": "question.22_text",
+      "notice": "question.22_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_23",
+      "text": "question.23_text",
+      "notice": "question.23_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_31",
+      "text": "question.31_text",
+      "notice": "question.31_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_38",
+      "text": "question.38_text",
+      "notice": "question.38_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_46",
+      "text": "question.46_text",
+      "notice": "question.46_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_130",
+      "text": "question.130_text",
+      "notice": "question.130_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_21",
+      "text": "question.21_text",
+      "notice": "question.21_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_262",
+      "text": "question.262_text",
+      "notice": "question.262_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_257",
+      "text": "question.257_text",
+      "notice": "question.257_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_255",
+      "text": "question.255_text",
+      "notice": "question.255_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_232",
+      "text": "question.232_text",
+      "notice": "question.232_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_230",
+      "text": "question.230_text",
+      "notice": "question.230_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_196",
+      "text": "question.196_text",
+      "notice": "question.196_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_103",
+      "text": "question.103_text",
+      "notice": "question.103_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_20",
+      "text": "question.20_text",
+      "notice": "question.20_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_111",
+      "text": "question.111_text",
+      "notice": "question.111_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_112",
+      "text": "question.112_text",
+      "notice": "question.112_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_118",
+      "text": "question.118_text",
+      "notice": "question.118_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_229",
+      "text": "question.229_text",
+      "notice": "question.229_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_133",
+      "text": "question.133_text",
+      "notice": "question.133_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_136",
+      "text": "question.136_text",
+      "notice": "question.136_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_149",
+      "text": "question.149_text",
+      "notice": "question.149_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_105",
+      "text": "question.105_text",
+      "notice": "question.105_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_200",
+      "text": "question.200_text",
+      "notice": "question.200_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_218",
+      "text": "question.218_text",
+      "notice": "question.218_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_98",
+      "text": "question.98_text",
+      "notice": "question.98_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_93",
+      "text": "question.93_text",
+      "notice": "question.93_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_89",
+      "text": "question.89_text",
+      "notice": "question.89_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_88",
+      "text": "question.88_text",
+      "notice": "question.88_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_86",
+      "text": "question.86_text",
+      "notice": "question.86_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
+    },
+    {
+      "key": "question_58",
+      "text": "question.58_text",
+      "notice": "question.58_notice",
+      "answer_format": "agr_5_scale_tol_3_scale_abs"
     },
     {
       "key": "question_4",
       "text": "question.4_text",
       "notice": "question.4_notice",
-      "answer_format": "agr_5_scale_tol_3_scale_abs"
-    },
-    {
-      "key": "question_5",
-      "text": "question.5_text",
-      "notice": "question.5_notice",
       "answer_format": "agr_5_scale_tol_3_scale_abs"
     }
   ],
@@ -108,13 +319,7 @@
   ],
   "i18n": {
     "en": {
-      "question": {
-        "1_text": "The legal retirement age should be increased from 65 to 67 years.",
-        "2_text": "Turkey may join the European Union.",
-        "3_text": "Taxes must be severely diminished, even if it means a reduction in public services.",
-        "4_text": "Islam can be assimilated in Belgium today.",
-        "5_text": "We must repeal the right of homosexual couples to adopt children."
-      },
+      "question": null,
       "answer_format": {
         "item": {
           "yes": "Yes",
@@ -135,59 +340,45 @@
         }
       }
     },
-    "fr": {
-      "question": {
-        "1_text": "L'âge légal de la pension devrait passer de 65 à 67 ans.",
-        "2_text": "La Turquie peut rejoindre l'Union européenne.",
-        "3_text": "Les taxes doivent être sévèrement diminuées, même si cela implique une réduction des services publics.",
-        "4_text": "L'islam peut être assimilé en Belgique aujourd'hui.",
-        "5_text": "Nous devons abroger le droit des couples homosexuels d'adopter des enfants."
+    "fr": null,
+    "answer_format": {
+      "item": {
+        "yes": "Oui",
+        "no": "Non",
+        "strongly_agree": "Tout à fait d'accord",
+        "agree": "Plutôt d'accord",
+        "no_opinion": "Je ne me prononce pas",
+        "disagree": "Plutôt pas d'accord",
+        "strongly_disagree": "Pas du tout d'accord"
       },
-      "answer_format": {
+      "tolerance": {
+        "absolute": "Non négociable",
         "item": {
-          "yes": "Oui",
-          "no": "Non",
-          "strongly_agree": "Tout à fait d'accord",
-          "agree": "Plutôt d'accord",
-          "no_opinion": "Je ne me prononce pas",
-          "disagree": "Plutôt pas d'accord",
-          "strongly_disagree": "Pas du tout d'accord"
-        },
-        "tolerance": {
-          "absolute": "Non négociable",
-          "item": {
-            "very_important": "Très important",
-            "important": "Important",
-            "not_important": "Pas important"
-          }
+          "very_important": "Très important",
+          "important": "Important",
+          "not_important": "Pas important"
         }
       }
-    },
-    "nl": {
-      "question": {
-        "1_text": "De wettelijke pensioenleeftijd moet worden verhoogd van 65 naar 67 jaar.",
-        "2_text": "Turkije kan lid worden van de Europese Unie.",
-        "3_text": "Belastingen moeten sterk worden verminderd, zelfs als dit een vermindering van openbare diensten betekent.",
-        "4_text": "Islam kan vandaag in België geassimileerd worden.",
-        "5_text": "We moeten het recht van homoseksuele paren om kinderen te adopteren, intrekken."
+    }
+  },
+  "nl": {
+    "question": null,
+    "answer_format": {
+      "item": {
+        "yes": "Ja",
+        "no": "Nee",
+        "strongly_agree": "Helemaal akkoord",
+        "agree": "Eerder ja",
+        "no_opinion": "Ik spreek mij niet uit",
+        "disagree": "Eerder nee",
+        "strongly_disagree": "Helemaal niet akkoord"
       },
-      "answer_format": {
+      "tolerance": {
+        "absolute": "Absoluut",
         "item": {
-          "yes": "Ja",
-          "no": "Nee",
-          "strongly_agree": "Helemaal akkoord",
-          "agree": "Eerder ja",
-          "no_opinion": "Ik spreek mij niet uit",
-          "disagree": "Eerder nee",
-          "strongly_disagree": "Helemaal niet akkoord"
-        },
-        "tolerance": {
-          "absolute": "Absoluut",
-          "item": {
-            "very_important": "Zeer belangrijk",
-            "important": "Belangrijk",
-            "not_important": "Niet belangrijk"
-          }
+          "very_important": "Zeer belangrijk",
+          "important": "Belangrijk",
+          "not_important": "Niet belangrijk"
         }
       }
     }
